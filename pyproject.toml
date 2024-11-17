@@ -1,21 +1,24 @@
 [tool.poetry]
-name = "tahtioppilaat"
+name = "webcntr"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Matti Luukkainen <mluukkai@iki.fi>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.13"
-pytest = "^8.3.3"
-flask = "^3.1.0"
+python = ">=3.10,<3.13"
+flask = "^3.0.3"
+robotframework = "^7.1.1"
+robotframework-seleniumlibrary = "^6.6.1"
 flask-sqlalchemy = "^3.1.1"
+python-dotenv = "^1.0.1"
+getenv = "^0.2.0"
 psycopg2-binary = "^2.9.10"
-coverage = "^7.6.7"
+requests = "^2.32.3"
 
 
 [tool.poetry.group.dev.dependencies]
-coverage = "^7.6.7"
+pytest = "^8.3.3"
 
 [build-system]
 requires = ["poetry-core"]

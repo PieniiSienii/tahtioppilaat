@@ -1,6 +1,6 @@
 # tahtioppilaat
 [![GHA workflow Badge](https://github.com/PieniiSienii/tahtioppilaat/workflows/CI/badge.svg)](https://github.com/Pieniisienii/tahtioppilaat/actions)
-[![codecov](https://codecov.io/gh/Pieniisienii/tahtioppilaat/graph/badge.svg?token=R8N1DOC5XI)](https://codecov.io/gh/Pieniisienii/tahtioppilaat)
+[![codecov](https://codecov.io/gh/PieniiSienii/tahtioppilaat/graph/badge.svg?token=0N8NYQEJWQ)](https://codecov.io/gh/PieniiSienii/tahtioppilaat)
 
 README:ssa tulee löytyä ainakin seuraavat asiat:
 Linkit backlogeihin (backlogeista tulee olla luettavissa olevat versiot julkisessa internetissä)

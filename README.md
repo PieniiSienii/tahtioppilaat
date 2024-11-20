@@ -25,6 +25,8 @@ Lataa poetry: pip install poetry
 
 Lataa riippuvuudet: poetry install
 
+Luo .env tiedosto, josta löytyy DATABASE_URL=secrets.CODECOV_TOKEN, TEST_ENV=TRUE ja SECRET_KEY
+
 Luo virtuaaliympäristö:poetry shell
 
 Käynnistä ohjelma: python3 index.py

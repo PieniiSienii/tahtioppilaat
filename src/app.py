@@ -7,8 +7,9 @@ from util import validate_todo
 @app.route("/", methods=["POST", "GET"])
 def index():
     # Fetch books (or references) from the database
-    books = get_books()
-    return render_template("index.html", books=books)
+    books = [i.doi for i in get_books()]
+    return render_template("index.html", dois=books)  # Pass 'dois' instead of 'doi'
+
 
 @app.route("/create_reference", methods=["POST", "GET"])
 def reference_creation():

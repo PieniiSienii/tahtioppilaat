@@ -11,3 +11,21 @@ Työlle tulee määritellä lisenssi https://help.github.com/articles/licensing-
 Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
 
 [Backlog linkki](https://docs.google.com/spreadsheets/d/1tfCgtgHHC6YhraJJi992deDDh6dO0IaimUXH1h2Ntps/edit?gid=0#gid=0)
+
+Definition of done: 
+
+Ohjelma toimii niin kuin user story kuvaa, koodia on testattu, jonka jälkeen löydetyt ongelmat korjattu.
+
+
+Käyttöohje:
+
+Kloonaa repositorio
+
+Lataa poetry: pip install poetry
+
+Lataa riippuvuudet: poetry install
+
+Luo virtuaaliympäristö:poetry shell
+
+Käynnistä ohjelma: python3 index.py
+

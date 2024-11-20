@@ -13,18 +13,29 @@ My Bibliography Manager
 </div>
 
 <div style="margin-top: 20px;">
-  <form action="/add_reference" method="post">
-    <label for="reference_link">Add a scientific link:</label><br>
+  <form action="/create_reference" method="post">
+    <label for="doi">DOI:</label><br>
     <input 
-      type="url" 
-      id="reference_link" 
-      name="reference_link" 
-      placeholder="Enter the link here..." 
-      style="width: 300px; padding: 8px; margin-top: 5px;" 
+      type="text" 
+      id="doi" 
+      name="doi" 
+      placeholder="Enter the DOI here..." 
       required
+      style="width: 300px; padding: 8px; margin-top: 5px;"
     >
-    <button type="submit" style="margin-left: 10px; padding: 8px;">Add to Bibliography</button>
+    <br><br>
+    <button type="submit" style="margin-left: 10px; padding: 8px;">Add DOI</button>
   </form>
+</div>
+
+<!-- Display DOIs -->
+<div style="margin-top: 30px;">
+  <h3>DOIs:</h3>
+  <ul>
+    {% for doi in dois %}
+      <li>{{doi}}</li>
+    {% endfor %}
+  </ul>
 </div>
 
 {% endblock %}

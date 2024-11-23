@@ -24,8 +24,8 @@ def get_books():
     return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books] 
 
 def create_reference(reference):
-    # Insert a new book into the Books table
-    if reference == str:
+    # Insert a new doi into dois table or book into the Books table
+    if isinstance(reference, str):
         sql = text(
             """
             INSERT INTO dois (reference)
@@ -38,14 +38,7 @@ def create_reference(reference):
         })
         db.session.commit()
 
-    if reference == dict:
-        id = reference["id"]
-        author = reference["author"]
-        title = reference["title"]
-        book_title = reference["book_title"]
-        publisher = reference["publisher"]
-        year = reference["year"]
-        reference = [author, title, book_title, publisher, year]
+    if isinstance(reference, dict):
         sql = text(
             """
             INSERT INTO books (author, title, book_title, publisher, year)

@@ -94,8 +94,7 @@ My Bibliography Manager
   <ul>
     {% for book in books %}
       <li>
-        {{book.author}} ({{book.year}}). {{book.title}}. 
-        <i>{{book.book_title}}</i>. {{book.publisher}}. 
+        {{book}}
       </li>
     {% endfor %}
   </ul>

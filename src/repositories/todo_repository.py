@@ -28,12 +28,12 @@ def create_reference(reference):
     if isinstance(reference, str):
         sql = text(
             """
-            INSERT INTO dois (reference)
-            VALUES (:reference)
+            INSERT INTO dois (doi)
+            VALUES (:doi)
             """
         )
         db.session.execute(sql, {
-            "reference": reference
+            "doi": reference
 
         })
         db.session.commit()

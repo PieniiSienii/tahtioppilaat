@@ -2,7 +2,7 @@ from config import db, app
 from sqlalchemy import text
 
 # Define table names
-books_table = "Books"
+books_table = "books"
 dois_table = "DOIs"
 
 def table_exists(name):
@@ -25,17 +25,18 @@ def reset_db():
 
     # Clear contents from DOIs table first to avoid foreign key conflicts
     if table_exists(dois_table):
-        sql = text(f"DELETE FROM {dois_table}")
+        sql = text(f"DELETE * FROM {dois_table}")
         db.session.execute(sql)
 
     if table_exists(books_table):
-        sql = text(f"DELETE FROM {books_table}")
+        sql = text(f"DELETE * FROM {books_table}")
         db.session.execute(sql)
 
     db.session.commit()
 
 def setup_db():
     """Drop existing tables and recreate them."""
+    print(f"Dropping tables if they exist {books_table} and {dois_table}")
     # Drop DOIs table if it exists
     if table_exists(dois_table):
         print(f"Table {dois_table} exists, dropping")
@@ -44,7 +45,7 @@ def setup_db():
         db.session.commit()
 
     # Drop Books table if it exists
-    if table_exists(books_table):
+    if table_exists(dois_table):
         print(f"Table {books_table} exists, dropping")
         sql = text(f"DROP TABLE {books_table}")
         db.session.execute(sql)
@@ -59,9 +60,23 @@ def setup_db():
         ")"
     )
     db.session.execute(sql)
-
+    db.session.commit()
+    # Create Books table
+    print(f"Creating table {books_table}")
+    sql = text(
+        f"CREATE TABLE {books_table} ("
+        "  id SERIAL PRIMARY KEY, "
+        "  author TEXT NOT NULL, "
+        "  title TEXT NOT NULL, "
+        "  book_title TEXT NOT NULL, "
+        "  publisher TEXT NOT NULL, "
+        "  year INTEGER NOT NULL "
+        ")"
+    )
+    db.session.execute(sql)
     db.session.commit()
 
 if __name__ == "__main__":
     with app.app_context():
+        reset_db()
         setup_db()

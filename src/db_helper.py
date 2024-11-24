@@ -2,11 +2,16 @@ from config import db, app
 from sqlalchemy import text
 
 # Define table names
+
 books_table = "books"
-dois_table = "DOIs"
+dois_table = "dois"
+articles_table = "articles"
+inproceedings_table = "inproceedings"
+
+
+# Check if table exists in the database
 
 def table_exists(name):
-    """Check if a table exists in the database."""
     sql_table_existence = text(
         "SELECT EXISTS ("
         "  SELECT 1"
@@ -19,51 +24,74 @@ def table_exists(name):
     result = db.session.execute(sql_table_existence)
     return result.fetchall()[0][0]
 
-def reset_db():
-    """Clear contents from existing tables (if any) before dropping them."""
-    print(f"Clearing contents from tables {books_table} and {dois_table}")
 
-    # Clear contents from DOIs table first to avoid foreign key conflicts
-    if table_exists(dois_table):
-        sql = text(f"DELETE * FROM {dois_table}")
+# Clear contents from tables first to avoid foreign key conflicts
+
+def reset_db():
+    def clear_table(table_name):
+        sql = text(f"DELETE FROM {table_name}")
         db.session.execute(sql)
+        db.session.commit()
+
+    print(f"Clearing contents from tables")
+
+    if table_exists(dois_table):
+        clear_table(dois_table)
 
     if table_exists(books_table):
-        sql = text(f"DELETE * FROM {books_table}")
-        db.session.execute(sql)
+        clear_table(books_table)
 
-    db.session.commit()
+    if table_exists(articles_table):
+        clear_table(articles_table)
+
+    if table_exists(inproceedings_table):
+        clear_table(inproceedings_table)
+
+
+# Drop existing tables and recreate them
 
 def setup_db():
-    """Drop existing tables and recreate them."""
-    print(f"Dropping tables if they exist {books_table} and {dois_table}")
-    # Drop DOIs table if it exists
-    if table_exists(dois_table):
-        print(f"Table {dois_table} exists, dropping")
-        sql = text(f"DROP TABLE {dois_table}")
+    def drop_table(table_name):
+        print(f"Table {table_name} exists, dropping")
+        sql = text(f"DROP TABLE {table_name}")
         db.session.execute(sql)
         db.session.commit()
 
-    # Drop Books table if it exists
-    if table_exists(dois_table):
-        print(f"Table {books_table} exists, dropping")
-        sql = text(f"DROP TABLE {books_table}")
+    def create_table(sql_str):
+        sql = text(sql_str)
         db.session.execute(sql)
         db.session.commit()
 
-    # Create DOIs table
+    print(f"Dropping tables if they exist")
+
+    if table_exists(dois_table):
+        drop_table(dois_table)
+
+    if table_exists(books_table):
+        drop_table(books_table)
+
+    if table_exists(articles_table):
+        drop_table(articles_table)
+
+    if table_exists(inproceedings_table):
+        drop_table(inproceedings_table)
+
+    # Create tables
+
     print(f"Creating table {dois_table}")
-    sql = text(
+
+    sql_str = (
         f"CREATE TABLE {dois_table} ("
-        "  id SERIAL PRIMARY KEY, "
-        "  doi TEXT NOT NULL UNIQUE"
-        ")"
-    )
-    db.session.execute(sql)
-    db.session.commit()
-    # Create Books table
+         "  id SERIAL PRIMARY KEY, "
+         "  doi TEXT NOT NULL UNIQUE"
+         ")"
+        )
+    
+    create_table(sql_str)
+
     print(f"Creating table {books_table}")
-    sql = text(
+    
+    sql_str = (
         f"CREATE TABLE {books_table} ("
         "  id SERIAL PRIMARY KEY, "
         "  author TEXT NOT NULL, "
@@ -72,9 +100,38 @@ def setup_db():
         "  publisher TEXT NOT NULL, "
         "  year INTEGER NOT NULL "
         ")"
+        )
+    
+    create_table(sql_str)
+    
+    print(f"Creating {articles_table}")
+
+    sql_str = (
+        f"CREATE TABLE {articles_table} ("
+        "  id SERIAL PRIMARY KEY, "
+        "  author TEXT NOT NULL, "
+        "  title TEXT NOT NULL, "
+        "  journal TEXT NOT NULL, "
+        "  year INTEGER NOT NULL "
+        ")"
+    )  
+
+    create_table(sql_str)
+
+    print(f"Creating {inproceedings_table}")
+
+    sql_str = (
+        f"CREATE TABLE {inproceedings_table} ("
+        "  id SERIAL PRIMARY KEY, "
+        "  author TEXT NOT NULL, "
+        "  title TEXT NOT NULL, "
+        "  book_title TEXT NOT NULL, "
+        "  year INTEGER NOT NULL "
+        ")"
     )
-    db.session.execute(sql)
-    db.session.commit()
+
+    create_table(sql_str)
+
 
 if __name__ == "__main__":
     with app.app_context():

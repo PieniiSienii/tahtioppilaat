@@ -83,7 +83,7 @@ def setup_db():
     sql_str = (
         f"CREATE TABLE {dois_table} ("
          "  id SERIAL PRIMARY KEY, "
-         "  doi TEXT NOT NULL UNIQUE"
+         "  doi TEXT NOT NULL"
          ")"
         )
     

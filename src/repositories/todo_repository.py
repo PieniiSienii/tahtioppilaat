@@ -2,11 +2,14 @@ from config import db
 from sqlalchemy import text
 from doi import DOI
 from book import Book
+from article import Article
+from inproceeding import Inproceeding
+
 
 def get_dois():
     # Fetch books from the Books table
     result = db.session.execute(
-        text("SELECT id, doi FROM DOIs")
+        text("SELECT id, doi FROM dois")
     )
     dois = result.fetchall()
     
@@ -23,9 +26,29 @@ def get_books():
     # Map the results to Book objects
     return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books] 
 
-def create_reference(reference):
-    # Insert a new doi into dois table or book into the Books table
-    if isinstance(reference, str):
+def get_articles():
+    # Fetch articles from the articles table
+    result = db.session.execute(
+        text("SELECT * FROM articles")
+    )
+    articles = result.fetchall()
+    
+    # Map the results to Book objects
+    return [Article(article[0], article[1], article[2], article[3], article[4]) for article in articles] 
+
+def get_inproceedings():
+    # Fetch inproceedings from the inpreceedings table
+    result = db.session.execute(
+        text("SELECT * FROM inproceedings")
+    )
+    inproceedings = result.fetchall()
+    
+    # Map the results to Book objects
+    return [Inproceeding(inproceeding[0], inproceeding[1], inproceeding[2], inproceeding[3], inproceeding[4]) for inproceeding in inproceedings] 
+
+def create_reference_doi(reference):
+    if reference != '':
+        # Insert a new doi into dois table
         sql = text(
             """
             INSERT INTO dois (doi)
@@ -38,20 +61,35 @@ def create_reference(reference):
         })
         db.session.commit()
 
-    if isinstance(reference, dict):
+def create_reference_book(reference):
+    if reference["author"] != '' and reference["author"] != None:
         sql = text(
             """
             INSERT INTO books (author, title, book_title, publisher, year)
             VALUES (:author, :title, :book_title, :publisher, :year)
             """
         )
-        db.session.execute(sql, {
-        "author": reference["author"],
-        "title": reference["title"],
-        "book_title": reference["book_title"],
-        "publisher": reference["publisher"],
-        "year": reference["year"]
-        })
+        db.session.execute(sql, reference)
         db.session.commit()
 
+def create_reference_article(reference):
+    if reference["author"] != '' and reference["author"] != None:
+        sql = text(
+            """
+            INSERT INTO articles (author, title, journal, year)
+            VALUES (:author, :title, :journal, :year)
+            """
+        )
+        db.session.execute(sql, reference)
+        db.session.commit()
 
+def create_reference_inproceeding(reference):
+    if reference["author"] != '' and reference["author"] != None and reference["book_title"] != None:
+        sql = text(
+            """
+            INSERT INTO inproceedings (author, title, book_title, year)
+            VALUES (:author, :title, :book_title, :year)
+            """
+        )
+        db.session.execute(sql, reference)
+        db.session.commit()

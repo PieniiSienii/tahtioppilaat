@@ -1,4 +1,4 @@
-class Articles:
+class Article:
     def __init__(self, id, author, title, journal, year):
         if not all([author, title, journal, year]):
             raise ValueError("All fields (author, title, journal, year) are required.")

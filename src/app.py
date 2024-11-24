@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_books, create_reference, get_dois
+from repositories.todo_repository import get_books, create_reference_doi, create_reference_book, create_reference_article, create_reference_inproceeding, get_dois, get_articles, get_inproceedings
 from config import app, test_env
 from util import validate_todo
 
@@ -11,48 +11,41 @@ def index():
     # return render_template("index.html", dois=dois)  # Pass 'dois' instead of 'doi'
     # Fetch books (or references) from the database
     books = get_books()
-    return render_template("index.html", books=books, dois=dois)  # Pass 'dois' instead of 'doi'
-
-
-# @app.route("/create_reference", methods=["POST", "GET"])
-# def reference_creation():
-#     # Get the reference link from the form
-#     reference_link = request.form.get("doi")
-
-#     try:
-#         # Validate and save the reference
-#         validate_todo(reference_link)  # Assuming validate_todo can handle reference validation
-#         create_reference(reference_link)
-#         return redirect("/")
-#     except Exception as error:
-#         flash(str(error))
-#         return redirect("/")
+    articles = get_articles()
+    inproceedings = get_inproceedings()
+    return render_template("index.html", books=books, dois=dois, articles=articles, inproceedings=inproceedings)  # Pass 'dois' instead of 'doi'
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
-    doi = request.form.get("doi")
+    # Handle doi case
+    doi_reference = request.form.get("doi")
     
-    if doi:
-        # Handle DOI case
-        # Fetch metadata from DOI service
-        validate_todo(doi)
-        reference = doi
-        #get doi metadata
-        # reference = fetch_doi_metadata(doi)
-    else:
-        # Handle manual entry case
-        reference = {
-            "author": request.form.get("author"),
-            "title": request.form.get("title"),
-            "book_title": request.form.get("book_title"),
-            "publisher": request.form.get("publisher"),
-            "year": request.form.get("year")
-        }
+    # Handle manual entry case
+    book_reference = {
+        "author": request.form.get("book_author"),
+        "title": request.form.get("book_title"),
+        "book_title": request.form.get("book_book_title"),
+        "publisher": request.form.get("book_publisher"),
+        "year": request.form.get("book_year")
+    }
+    article_reference = {
+        "author": request.form.get("article_author"),
+        "title": request.form.get("article_title"),
+        "journal": request.form.get("article_journal"),
+        "year": request.form.get("article_year")
+    }
+    inproceeding_reference = {
+        "author": request.form.get("inproceeding_author"),
+        "title": request.form.get("inproceeding_title"),
+        "book_title": request.form.get("inproceeding_book_title"),
+        "year": request.form.get("inproceeding_year"),
+    }
     # Save reference to database
-    create_reference(reference)
+    create_reference_doi(doi_reference)
+    create_reference_book(book_reference)
+    create_reference_article(article_reference)
+    create_reference_inproceeding(inproceeding_reference)
     return redirect("/")
-
-
 
 
 # Route for resetting the database (testing only)

@@ -32,53 +32,145 @@ My Bibliography Manager
         </div>
       </details>
 
-      <!-- Manual Entry Section -->
-      <details style="border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+      <!-- Article Section -->
+      <details style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
         <summary style="cursor: pointer; padding: 8px; font-weight: bold; user-select: none;">
-          Option 2: Manual Entry
+          Option 2: Add Article
         </summary>
         <div style="margin-top: 15px;">
-          <label for="author">Author:</label><br>
+          <label for="article_author">Author:</label><br>
           <input 
             type="text" 
-            id="author" 
-            name="author" 
+            id="article_author" 
+            name="article_author" 
             placeholder="Enter the author(s) here..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
           <br><br>
-          <label for="title">Title:</label><br>
+          <label for="article_title">Title:</label><br>
           <input 
             type="text" 
-            id="title" 
-            name="title" 
+            id="article_title" 
+            name="article_title" 
             placeholder="Enter the title here..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
           <br><br>
-          <label for="book_title">Book Title/Journal:</label><br>
+          <label for="article_journal">Journal:</label><br>
+          <input 
+            type="text" 
+            id="article_journal" 
+            name="article_journal" 
+            placeholder="Enter the journal name..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="article_year">Year:</label><br>
+          <input 
+            type="number" 
+            id="article_year" 
+            name="article_year" 
+            placeholder="Enter publication year..." 
+            min="1800"
+            max="2024"
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+        </div>
+      </details>
+
+      <!-- Inproceedings Section -->
+      <details style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+        <summary style="cursor: pointer; padding: 8px; font-weight: bold; user-select: none;">
+          Option 3: Add Conference Paper
+        </summary>
+        <div style="margin-top: 15px;">
+          <label for="inproceeding_author">Author:</label><br>
+          <input 
+            type="text" 
+            id="inproceeding_author" 
+            name="inproceeding_author" 
+            placeholder="Enter the author(s) here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="inproceeding_title">Title:</label><br>
+          <input 
+            type="text" 
+            id="inproceeding_title" 
+            name="inproceeding_title" 
+            placeholder="Enter the title here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="inproceeding_book_title">Book Title (Conference Proceedings):</label><br>
+          <input 
+            type="text" 
+            id="inproceeding_book_title" 
+            name="inproceeding_book_title" 
+            placeholder="Enter the conference proceedings name..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="inproceeding_year">Year:</label><br>
+          <input 
+            type="number" 
+            id="inproceeding_year" 
+            name="inproceeding_year" 
+            placeholder="Enter publication year..." 
+            min="1800"
+            max="2024"
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+        </div>
+      </details>
+
+      <!-- Book Section -->
+      <details style="border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+        <summary style="cursor: pointer; padding: 8px; font-weight: bold; user-select: none;">
+          Option 4: Add Book
+        </summary>
+        <div style="margin-top: 15px;">
+          <label for="book_author">Author:</label><br>
+          <input 
+            type="text" 
+            id="book_author" 
+            name="book_author" 
+            placeholder="Enter the author(s) here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="book_title">Title:</label><br>
           <input 
             type="text" 
             id="book_title" 
             name="book_title" 
-            placeholder="Enter the book title or journal name..." 
+            placeholder="Enter the title here..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
           <br><br>
-          <label for="publisher">Publisher:</label><br>
+          <label for="book_book_title">Book_Title:</label><br>
           <input 
             type="text" 
-            id="publisher" 
-            name="publisher" 
+            id="book_book_title" 
+            name="book_book_title" 
+            placeholder="Enter the title here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="book_publisher">Publisher:</label><br>
+          <input 
+            type="text" 
+            id="book_publisher" 
+            name="book_publisher" 
             placeholder="Enter the publisher name..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
           <br><br>
-          <label for="year">Year:</label><br>
+          <label for="book_year">Year:</label><br>
           <input 
             type="number" 
-            id="year" 
-            name="year" 
+            id="book_year" 
+            name="book_year" 
             placeholder="Enter publication year..." 
             min="1800"
             max="2024"
@@ -90,7 +182,7 @@ My Bibliography Manager
       <button 
         type="submit" 
         style="margin-top: 20px; margin-left: 10px; padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;"
-        onclick="return validateForm()"
+        onclick="return true"
       >
         Add Reference
       </button>
@@ -99,16 +191,28 @@ My Bibliography Manager
 
   <!-- Right Column - Display References -->
   <div style="flex: 1; max-width: 800px;">
-    <!-- Display Books -->
     <div style="margin-top: 30px;">
+      <h3>Articles:</h3>
+      <ul>
+        {% for article in articles %}
+          <li>{{article}}</li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Conference Papers:</h3>
+      <ul>
+        {% for inproceeding in inproceedings %}
+          <li>{{inproceeding}}</li>
+        {% endfor %}
+      </ul>
+
       <h3>Books:</h3>
       <ul>
         {% for book in books %}
-          <li>
-            {{book}}
-          </li>
+          <li>{{book}}</li>
         {% endfor %}
       </ul>
+
       <h3>DOIs:</h3>
       <ul>
         {% for doi in dois %}
@@ -120,27 +224,7 @@ My Bibliography Manager
 </div>
 
 <script>
-function validateForm() {
-    const doi = document.getElementById('doi').value.trim();
-    const author = document.getElementById('author').value.trim();
-    const title = document.getElementById('title').value.trim();
-    const book_title = document.getElementById('book_title').value.trim();
-    const publisher = document.getElementById('publisher').value.trim();
-    const year = document.getElementById('year').value.trim();
 
-    // Check if DOI is provided
-    if (doi !== '') {
-        return true;
-    }
-
-    // If no DOI, check if all manual fields are filled
-    if (author === '' || title === '' || book_title === '' || publisher === '' || year === '') {
-        alert('Please either provide a DOI or fill in all manual entry fields.');
-        return false;
-    }
-
-    return true;
-}
 
 // Add event listeners to ensure only one section is open at a time
 document.addEventListener('DOMContentLoaded', function() {

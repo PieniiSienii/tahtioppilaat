@@ -5,105 +5,118 @@ My Bibliography Manager
 {% endblock %}
 
 {% block body %}
-
 <h2>My Bibliography Manager</h2>
 
 <div>
-  <p>Manage your scientific references with ease. Either enter a DOI for automatic lookup, or manually enter the reference details.</p>
+  <p>Manage your scientific references with ease. Select your preferred input method below.</p>
 </div>
 
-<div style="margin-top: 20px;">
-  <form action="/create_reference" method="post" id="referenceForm">
-    <!-- DOI Section -->
-    <div style="margin-bottom: 30px;">
-      <h3>Option 1: Add by DOI</h3>
-      <label for="doi">DOI:</label><br>
-      <input 
-        type="text" 
-        id="doi" 
-        name="doi" 
-        placeholder="Enter the DOI here..." 
-        style="width: 300px; padding: 8px; margin-top: 5px;"
+<div style="display: flex; gap: 40px; margin-top: 20px;">
+  <!-- Left Column - Input Forms -->
+  <div style="flex: 0 0 400px;">
+    <form action="/create_reference" method="post" id="referenceForm">
+      <!-- DOI Section -->
+      <details style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+        <summary style="cursor: pointer; padding: 8px; font-weight: bold; user-select: none;">
+          Option 1: Add by DOI
+        </summary>
+        <div style="margin-top: 15px;">
+          <label for="doi">DOI:</label><br>
+          <input 
+            type="text" 
+            id="doi" 
+            name="doi" 
+            placeholder="Enter the DOI here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+        </div>
+      </details>
+
+      <!-- Manual Entry Section -->
+      <details style="border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+        <summary style="cursor: pointer; padding: 8px; font-weight: bold; user-select: none;">
+          Option 2: Manual Entry
+        </summary>
+        <div style="margin-top: 15px;">
+          <label for="author">Author:</label><br>
+          <input 
+            type="text" 
+            id="author" 
+            name="author" 
+            placeholder="Enter the author(s) here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="title">Title:</label><br>
+          <input 
+            type="text" 
+            id="title" 
+            name="title" 
+            placeholder="Enter the title here..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="book_title">Book Title/Journal:</label><br>
+          <input 
+            type="text" 
+            id="book_title" 
+            name="book_title" 
+            placeholder="Enter the book title or journal name..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="publisher">Publisher:</label><br>
+          <input 
+            type="text" 
+            id="publisher" 
+            name="publisher" 
+            placeholder="Enter the publisher name..." 
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+          <br><br>
+          <label for="year">Year:</label><br>
+          <input 
+            type="number" 
+            id="year" 
+            name="year" 
+            placeholder="Enter publication year..." 
+            min="1800"
+            max="2024"
+            style="width: 300px; padding: 8px; margin-top: 5px;"
+          >
+        </div>
+      </details>
+
+      <button 
+        type="submit" 
+        style="margin-top: 20px; margin-left: 10px; padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;"
+        onclick="return validateForm()"
       >
+        Add Reference
+      </button>
+    </form>
+  </div>
+
+  <!-- Right Column - Display References -->
+  <div style="flex: 1; max-width: 800px;">
+    <!-- Display Books -->
+    <div style="margin-top: 30px;">
+      <h3>Books:</h3>
+      <ul>
+        {% for book in books %}
+          <li>
+            {{book}}
+          </li>
+        {% endfor %}
+      </ul>
+      <h3>DOIs:</h3>
+      <ul>
+        {% for doi in dois %}
+          <li>{{doi}}</li>
+        {% endfor %}
+      </ul>
     </div>
-
-    <!-- Manual Entry Section -->
-    <div>
-      <h3>Option 2: Manual Entry</h3>
-      <label for="author">Author:</label><br>
-      <input 
-        type="text" 
-        id="author" 
-        name="author" 
-        placeholder="Enter the author(s) here..." 
-        style="width: 300px; padding: 8px; margin-top: 5px;"
-      >
-      <br><br>
-      <label for="title">Title:</label><br>
-      <input 
-        type="text" 
-        id="title" 
-        name="title" 
-        placeholder="Enter the title here..." 
-        style="width: 300px; padding: 8px; margin-top: 5px;"
-      >
-      <br><br>
-      <label for="book_title">Book Title/Journal:</label><br>
-      <input 
-        type="text" 
-        id="book_title" 
-        name="book_title" 
-        placeholder="Enter the book title or journal name..." 
-        style="width: 300px; padding: 8px; margin-top: 5px;"
-      >
-      <br><br>
-      <label for="publisher">Publisher:</label><br>
-      <input 
-        type="text" 
-        id="publisher" 
-        name="publisher" 
-        placeholder="Enter the publisher name..." 
-        style="width: 300px; padding: 8px; margin-top: 5px;"
-      >
-      <br><br>
-      <label for="year">Year:</label><br>
-      <input 
-        type="number" 
-        id="year" 
-        name="year" 
-        placeholder="Enter publication year..." 
-        min="1800"
-        max="2024"
-        style="width: 300px; padding: 8px; margin-top: 5px;"
-      >
-    </div>
-
-    <button 
-      type="submit" 
-      style="margin-top: 20px; margin-left: 10px; padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;"
-      onclick="return validateForm()"
-    >
-      Add Reference
-    </button>
-  </form>
-</div>
-
-<!-- Display Books -->
-<div style="margin-top: 30px;">
-  <h3>Books:</h3>
-  <ul>
-    {% for book in books %}
-      <li>
-        {{book}}
-      </li>
-    {% endfor %}
-  </ul>
-  <h3>DOIs:</h3>
-  <ul>
-    {% for doi in dois %}
-      <li>{{doi}}</li>
-    {% endfor %}
-  </ul>
+  </div>
 </div>
 
 <script>
@@ -129,5 +142,21 @@ function validateForm() {
     return true;
 }
 
+// Add event listeners to ensure only one section is open at a time
+document.addEventListener('DOMContentLoaded', function() {
+    const detailsElements = document.querySelectorAll('details');
+    
+    detailsElements.forEach(details => {
+        details.addEventListener('click', (e) => {
+            if (e.target.tagName === 'SUMMARY') {
+                detailsElements.forEach(otherDetails => {
+                    if (otherDetails !== details) {
+                        otherDetails.removeAttribute('open');
+                    }
+                });
+            }
+        });
+    });
+});
 </script>
 {% endblock %}

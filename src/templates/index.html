@@ -9,22 +9,125 @@ My Bibliography Manager
 <h2>My Bibliography Manager</h2>
 
 <div>
-  <p>Manage your scientific references with ease. Add links to scientific books or articles to create a personalized bibliography in BibTeX format.</p>
+  <p>Manage your scientific references with ease. Either enter a DOI for automatic lookup, or manually enter the reference details.</p>
 </div>
 
 <div style="margin-top: 20px;">
-  <form action="/add_reference" method="post">
-    <label for="reference_link">Add a scientific link:</label><br>
-    <input 
-      type="url" 
-      id="reference_link" 
-      name="reference_link" 
-      placeholder="Enter the link here..." 
-      style="width: 300px; padding: 8px; margin-top: 5px;" 
-      required
+  <form action="/create_reference" method="post" id="referenceForm">
+    <!-- DOI Section -->
+    <div style="margin-bottom: 30px;">
+      <h3>Option 1: Add by DOI</h3>
+      <label for="doi">DOI:</label><br>
+      <input 
+        type="text" 
+        id="doi" 
+        name="doi" 
+        placeholder="Enter the DOI here..." 
+        style="width: 300px; padding: 8px; margin-top: 5px;"
+      >
+    </div>
+
+    <!-- Manual Entry Section -->
+    <div>
+      <h3>Option 2: Manual Entry</h3>
+      <label for="author">Author:</label><br>
+      <input 
+        type="text" 
+        id="author" 
+        name="author" 
+        placeholder="Enter the author(s) here..." 
+        style="width: 300px; padding: 8px; margin-top: 5px;"
+      >
+      <br><br>
+      <label for="title">Title:</label><br>
+      <input 
+        type="text" 
+        id="title" 
+        name="title" 
+        placeholder="Enter the title here..." 
+        style="width: 300px; padding: 8px; margin-top: 5px;"
+      >
+      <br><br>
+      <label for="book_title">Book Title/Journal:</label><br>
+      <input 
+        type="text" 
+        id="book_title" 
+        name="book_title" 
+        placeholder="Enter the book title or journal name..." 
+        style="width: 300px; padding: 8px; margin-top: 5px;"
+      >
+      <br><br>
+      <label for="publisher">Publisher:</label><br>
+      <input 
+        type="text" 
+        id="publisher" 
+        name="publisher" 
+        placeholder="Enter the publisher name..." 
+        style="width: 300px; padding: 8px; margin-top: 5px;"
+      >
+      <br><br>
+      <label for="year">Year:</label><br>
+      <input 
+        type="number" 
+        id="year" 
+        name="year" 
+        placeholder="Enter publication year..." 
+        min="1800"
+        max="2024"
+        style="width: 300px; padding: 8px; margin-top: 5px;"
+      >
+    </div>
+
+    <button 
+      type="submit" 
+      style="margin-top: 20px; margin-left: 10px; padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;"
+      onclick="return validateForm()"
     >
-    <button type="submit" style="margin-left: 10px; padding: 8px;">Add to Bibliography</button>
+      Add Reference
+    </button>
   </form>
 </div>
 
+<!-- Display Books -->
+<div style="margin-top: 30px;">
+  <h3>Books:</h3>
+  <ul>
+    {% for book in books %}
+      <li>
+        {{book}}
+      </li>
+    {% endfor %}
+  </ul>
+  <h3>DOIs:</h3>
+  <ul>
+    {% for doi in dois %}
+      <li>{{doi}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+function validateForm() {
+    const doi = document.getElementById('doi').value.trim();
+    const author = document.getElementById('author').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const book_title = document.getElementById('book_title').value.trim();
+    const publisher = document.getElementById('publisher').value.trim();
+    const year = document.getElementById('year').value.trim();
+
+    // Check if DOI is provided
+    if (doi !== '') {
+        return true;
+    }
+
+    // If no DOI, check if all manual fields are filled
+    if (author === '' || title === '' || book_title === '' || publisher === '' || year === '') {
+        alert('Please either provide a DOI or fill in all manual entry fields.');
+        return false;
+    }
+
+    return true;
+}
+
+</script>
 {% endblock %}

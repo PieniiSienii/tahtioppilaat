@@ -71,6 +71,3 @@ class TestIntegration(unittest.TestCase):
         self.assertIn("published by", str(book))
         self.assertIn("journal:", str(article))  # Updated check
         self.assertIn("Book_title:", str(inproceeding))  # Updated check
-
-if __name__ == '__main__':
-    unittest.main(verbosity=2)

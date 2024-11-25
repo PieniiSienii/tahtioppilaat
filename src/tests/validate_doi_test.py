@@ -70,6 +70,3 @@ class TestDOIValidation(unittest.TestCase):
             self.validate_doi_url(valid_id_url),
             "Publisher ID of 4 digits should be valid"
         )
-
-if __name__ == '__main__':
-    unittest.main()

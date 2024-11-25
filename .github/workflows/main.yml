@@ -36,3 +36,4 @@ jobs:
         uses: codecov/codecov-action@v4
         env: 
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }} 

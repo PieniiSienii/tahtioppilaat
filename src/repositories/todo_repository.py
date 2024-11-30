@@ -36,7 +36,8 @@ def get_articles():
     articles = result.fetchall()
 
     # Map the results to Book objects
-    return [Article(article[0], article[1], article[2], article[3], article[4]) for article in articles]
+    return [Article(article[0], article[1], article[2],\
+                     article[3], article[4]) for article in articles]
 
 
 def get_inproceedings():
@@ -47,7 +48,8 @@ def get_inproceedings():
     inproceedings = result.fetchall()
 
     # Map the results to Book objects
-    return [Inproceeding(inproceeding[0], inproceeding[1], inproceeding[2], inproceeding[3], inproceeding[4]) for inproceeding in inproceedings]
+    return [Inproceeding(inproceeding[0], inproceeding[1], inproceeding[2],\
+                          inproceeding[3], inproceeding[4]) for inproceeding in inproceedings]
 
 
 def create_reference_doi(reference):
@@ -89,9 +91,9 @@ def create_reference_article(reference):
         db.session.execute(sql, reference)
         db.session.commit()
 
-
 def create_reference_inproceeding(reference):
-    if reference["author"] != '' and reference["author"] != None and reference["book_title"] != None:
+    if reference["author"] != '' and\
+       reference["author"] is not None and reference["book_title"] != None:
         sql = text(
             """
             INSERT INTO inproceedings (author, title, book_title, year)

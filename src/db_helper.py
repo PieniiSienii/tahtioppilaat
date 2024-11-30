@@ -1,12 +1,13 @@
-from config import db, app
 from sqlalchemy import text
+from config import db, app
+
 
 # Define table names
 
-books_table = "books"
-dois_table = "dois"
-articles_table = "articles"
-inproceedings_table = "inproceedings"
+BOOKS_TABLE = "books"
+DOIS_TABLE = "dois"
+ARTICLES_TABLE = "articles"
+INPROCEEDINGS_TABLE = "inproceedings"
 
 
 # Check if table exists in the database
@@ -33,19 +34,19 @@ def reset_db():
         db.session.execute(sql)
         db.session.commit()
 
-    print(f"Clearing contents from tables")
+    print("Clearing contents from tables")
 
-    if table_exists(dois_table):
-        clear_table(dois_table)
+    if table_exists(DOIS_TABLE):
+        clear_table(DOIS_TABLE)
 
-    if table_exists(books_table):
-        clear_table(books_table)
+    if table_exists(BOOKS_TABLE):
+        clear_table(BOOKS_TABLE)
 
-    if table_exists(articles_table):
-        clear_table(articles_table)
+    if table_exists(ARTICLES_TABLE):
+        clear_table(ARTICLES_TABLE)
 
-    if table_exists(inproceedings_table):
-        clear_table(inproceedings_table)
+    if table_exists(INPROCEEDINGS_TABLE):
+        clear_table(INPROCEEDINGS_TABLE)
 
 
 # Drop existing tables and recreate them
@@ -62,26 +63,26 @@ def setup_db():
         db.session.execute(sql)
         db.session.commit()
 
-    print(f"Dropping tables if they exist")
+    print("Dropping tables if they exist")
 
-    if table_exists(dois_table):
-        drop_table(dois_table)
+    if table_exists(DOIS_TABLE):
+        drop_table(DOIS_TABLE)
 
-    if table_exists(books_table):
-        drop_table(books_table)
+    if table_exists(BOOKS_TABLE):
+        drop_table(BOOKS_TABLE)
 
-    if table_exists(articles_table):
-        drop_table(articles_table)
+    if table_exists(ARTICLES_TABLE):
+        drop_table(ARTICLES_TABLE)
 
-    if table_exists(inproceedings_table):
-        drop_table(inproceedings_table)
+    if table_exists(INPROCEEDINGS_TABLE):
+        drop_table(INPROCEEDINGS_TABLE)
 
     # Create tables
 
-    print(f"Creating table {dois_table}")
+    print(f"Creating table {DOIS_TABLE}")
 
     sql_str = (
-        f"CREATE TABLE {dois_table} ("
+        f"CREATE TABLE {DOIS_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  doi TEXT NOT NULL"
         ")"
@@ -89,10 +90,10 @@ def setup_db():
 
     create_table(sql_str)
 
-    print(f"Creating table {books_table}")
+    print(f"Creating table {BOOKS_TABLE}")
 
     sql_str = (
-        f"CREATE TABLE {books_table} ("
+        f"CREATE TABLE {BOOKS_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
@@ -104,10 +105,10 @@ def setup_db():
 
     create_table(sql_str)
 
-    print(f"Creating {articles_table}")
+    print(f"Creating {ARTICLES_TABLE}")
 
     sql_str = (
-        f"CREATE TABLE {articles_table} ("
+        f"CREATE TABLE {ARTICLES_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
@@ -118,10 +119,10 @@ def setup_db():
 
     create_table(sql_str)
 
-    print(f"Creating {inproceedings_table}")
+    print(f"Creating {INPROCEEDINGS_TABLE}")
 
     sql_str = (
-        f"CREATE TABLE {inproceedings_table} ("
+        f"CREATE TABLE {INPROCEEDINGS_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "

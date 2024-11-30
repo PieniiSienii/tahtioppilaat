@@ -1,9 +1,9 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify
 from db_helper import reset_db
-from repositories.todo_repository import get_books, create_reference_doi, create_reference_book, create_reference_article, create_reference_inproceeding, get_dois, get_articles, get_inproceedings
+from repositories.todo_repository import get_books, create_reference_doi,\
+create_reference_book, create_reference_article,\
+create_reference_inproceeding, get_dois, get_articles, get_inproceedings
 from config import app, test_env
-from util import validate_todo
-
 
 @app.route("/", methods=["POST", "GET"])
 def index():
@@ -15,7 +15,10 @@ def index():
     articles = get_articles()
     inproceedings = get_inproceedings()
     # Pass 'dois' instead of 'doi'
-    return render_template("index.html", books=books, dois=dois, articles=articles, inproceedings=inproceedings)
+    return render_template("index.html", books=books,\
+                            dois=dois,\
+                            articles=articles,\
+                            inproceedings=inproceedings)
 
 
 @app.route("/create_reference", methods=["POST"])

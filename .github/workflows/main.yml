@@ -48,7 +48,7 @@ jobs:
         run: poetry run coverage xml
       
       - name: Pylint 
-        run: pylint src/
+        run: poetry run pylint src/
 
       - name: Coverage report to Codecov
         uses: codecov/codecov-action@v4

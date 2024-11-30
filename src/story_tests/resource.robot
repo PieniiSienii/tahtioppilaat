@@ -7,7 +7,7 @@ ${DELAY}      0 seconds
 ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
 ${BROWSER}    chrome
-${HEADLESS}   false
+${HEADLESS}   true
 
 *** Keywords ***
 Open And Configure Browser

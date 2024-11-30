@@ -1,7 +1,8 @@
 class Inproceeding:
     def __init__(self, id, author, title, book_title, year):
         if not all([author, title, book_title, year]):
-            raise ValueError("All fields (author, title, book_title, year) are required.")
+            raise ValueError(
+                "All fields (author, title, book_title, year) are required.")
         self.id = id
         self.author = author
         self.title = title

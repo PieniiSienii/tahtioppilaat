@@ -1,11 +1,12 @@
 import unittest
 import re
 
+
 class TestDOIValidation(unittest.TestCase):
     def setUp(self):
         # This could contain any setup needed before each test
         pass
-    
+
     def validate_doi_url(self, url):
         """Helper method to validate DOI URL format"""
         doi_pattern = r'^https?://(dx\.)?doi\.org/10\.\d{4,9}/[-._;()/:\w]+$'
@@ -19,7 +20,7 @@ class TestDOIValidation(unittest.TestCase):
             "https://dx.doi.org/10.5678/abcdef",
             "http://dx.doi.org/10.1234/test-123"
         ]
-        
+
         for url in valid_urls:
             with self.subTest(url=url):
                 self.assertTrue(
@@ -39,7 +40,7 @@ class TestDOIValidation(unittest.TestCase):
             "http://doi.org/10.1234/$$$",  # invalid characters
             "doi.org/10.1234/test"  # missing protocol
         ]
-        
+
         for url in invalid_urls:
             with self.subTest(url=url):
                 self.assertFalse(
@@ -63,7 +64,7 @@ class TestDOIValidation(unittest.TestCase):
             self.validate_doi_url(short_id_url),
             "Publisher ID should be at least 4 digits"
         )
-        
+
         # Test valid publisher ID
         valid_id_url = "https://doi.org/10.1234/test"
         self.assertTrue(

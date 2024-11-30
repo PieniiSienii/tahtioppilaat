@@ -1,18 +1,18 @@
 # function validateForm() {
 #     const doi = document.getElementById('doi').value.trim();
-    
+
 #     // Article fields
 #     const articleAuthor = document.getElementById('article_author').value.trim();
 #     const articleTitle = document.getElementById('article_title').value.trim();
 #     const articleJournal = document.getElementById('article_journal').value.trim();
 #     const articleYear = document.getElementById('article_year').value.trim();
-    
+
 #     // Inproceedings fields
 #     const inproceedingAuthor = document.getElementById('inproceeding_author').value.trim();
 #     const inproceedingTitle = document.getElementById('inproceeding_title').value.trim();
 #     const inproceedingBookTitle = document.getElementById('inproceeding_book_title').value.trim();
 #     const inproceedingYear = document.getElementById('inproceeding_year').value.trim();
-    
+
 #     // Book fields
 #     const bookAuthor = document.getElementById('book_author').value.trim();
 #     const bookTitle = document.getElementById('book_title').value.trim();
@@ -26,13 +26,13 @@
 #     }
 
 #     // Check if all fields in any section are filled
-#     const isArticleComplete = articleAuthor !== '' && articleTitle !== '' && 
+#     const isArticleComplete = articleAuthor !== '' && articleTitle !== '' &&
 #                             articleJournal !== '' && articleYear !== '';
-    
-#     const isinproceedingComplete = inproceedingAuthor !== '' && inproceedingTitle !== '' && 
+
+#     const isinproceedingComplete = inproceedingAuthor !== '' && inproceedingTitle !== '' &&
 #                            inproceedingBookTitle !== '' && inproceedingYear !== '';
-    
-#     const isBookComplete = bookAuthor !== '' && bookTitle !== '' && 
+
+#     const isBookComplete = bookAuthor !== '' && bookTitle !== '' &&
 #                          bookPublisher !== '' && bookYear !== '';
 
 #     if (!isArticleComplete && !isInproceedingComplete && !isBookComplete) {

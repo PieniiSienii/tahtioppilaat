@@ -12,9 +12,10 @@ def get_dois():
         text("SELECT id, doi FROM dois")
     )
     dois = result.fetchall()
-    
+
     # Map the results to Book objects
-    return [DOI(doi[0], doi[1]) for doi in dois] 
+    return [DOI(doi[0], doi[1]) for doi in dois]
+
 
 def get_books():
     # Fetch books from the Books table
@@ -22,9 +23,10 @@ def get_books():
         text("SELECT * FROM books")
     )
     books = result.fetchall()
-    
+
     # Map the results to Book objects
-    return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books] 
+    return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books]
+
 
 def get_articles():
     # Fetch articles from the articles table
@@ -32,9 +34,10 @@ def get_articles():
         text("SELECT * FROM articles")
     )
     articles = result.fetchall()
-    
+
     # Map the results to Book objects
-    return [Article(article[0], article[1], article[2], article[3], article[4]) for article in articles] 
+    return [Article(article[0], article[1], article[2], article[3], article[4]) for article in articles]
+
 
 def get_inproceedings():
     # Fetch inproceedings from the inpreceedings table
@@ -42,9 +45,10 @@ def get_inproceedings():
         text("SELECT * FROM inproceedings")
     )
     inproceedings = result.fetchall()
-    
+
     # Map the results to Book objects
-    return [Inproceeding(inproceeding[0], inproceeding[1], inproceeding[2], inproceeding[3], inproceeding[4]) for inproceeding in inproceedings] 
+    return [Inproceeding(inproceeding[0], inproceeding[1], inproceeding[2], inproceeding[3], inproceeding[4]) for inproceeding in inproceedings]
+
 
 def create_reference_doi(reference):
     if reference != '':
@@ -61,6 +65,7 @@ def create_reference_doi(reference):
         })
         db.session.commit()
 
+
 def create_reference_book(reference):
     if reference["author"] != '' and reference["author"] != None:
         sql = text(
@@ -72,6 +77,7 @@ def create_reference_book(reference):
         db.session.execute(sql, reference)
         db.session.commit()
 
+
 def create_reference_article(reference):
     if reference["author"] != '' and reference["author"] != None:
         sql = text(
@@ -82,6 +88,7 @@ def create_reference_article(reference):
         )
         db.session.execute(sql, reference)
         db.session.commit()
+
 
 def create_reference_inproceeding(reference):
     if reference["author"] != '' and reference["author"] != None and reference["book_title"] != None:

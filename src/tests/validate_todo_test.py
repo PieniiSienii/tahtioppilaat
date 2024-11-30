@@ -1,6 +1,7 @@
 import unittest
 from util import validate_todo, UserInputError
 
+
 class TestTodoValidation(unittest.TestCase):
     def setUp(self):
         pass

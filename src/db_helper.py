@@ -82,15 +82,15 @@ def setup_db():
 
     sql_str = (
         f"CREATE TABLE {dois_table} ("
-         "  id SERIAL PRIMARY KEY, "
-         "  doi TEXT NOT NULL"
-         ")"
-        )
-    
+        "  id SERIAL PRIMARY KEY, "
+        "  doi TEXT NOT NULL"
+        ")"
+    )
+
     create_table(sql_str)
 
     print(f"Creating table {books_table}")
-    
+
     sql_str = (
         f"CREATE TABLE {books_table} ("
         "  id SERIAL PRIMARY KEY, "
@@ -100,10 +100,10 @@ def setup_db():
         "  publisher TEXT NOT NULL, "
         "  year INTEGER NOT NULL "
         ")"
-        )
-    
+    )
+
     create_table(sql_str)
-    
+
     print(f"Creating {articles_table}")
 
     sql_str = (
@@ -114,7 +114,7 @@ def setup_db():
         "  journal TEXT NOT NULL, "
         "  year INTEGER NOT NULL "
         ")"
-    )  
+    )
 
     create_table(sql_str)
 

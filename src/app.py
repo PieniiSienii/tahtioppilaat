@@ -4,6 +4,7 @@ from repositories.todo_repository import get_books, create_reference_doi, create
 from config import app, test_env
 from util import validate_todo
 
+
 @app.route("/", methods=["POST", "GET"])
 def index():
     # Fetch dois (or references) from the database
@@ -13,13 +14,15 @@ def index():
     books = get_books()
     articles = get_articles()
     inproceedings = get_inproceedings()
-    return render_template("index.html", books=books, dois=dois, articles=articles, inproceedings=inproceedings)  # Pass 'dois' instead of 'doi'
+    # Pass 'dois' instead of 'doi'
+    return render_template("index.html", books=books, dois=dois, articles=articles, inproceedings=inproceedings)
+
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
     # Handle doi case
     doi_reference = request.form.get("doi")
-    
+
     # Handle manual entry case
     book_reference = {
         "author": request.form.get("book_author"),

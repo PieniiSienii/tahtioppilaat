@@ -11,5 +11,4 @@ class Book:
         self.year = year
 
     def __str__(self):
-        return f"{self.title} by {self.author} ({self.year}),\
-          published by {self.publisher}. Book_title: {self.book_title}"
+        return f"{self.title} by {self.author} ({self.year}), published by {self.publisher}. Book_title: {self.book_title}"

@@ -189,7 +189,7 @@ My Bibliography Manager
     </form>
   </div>
 
-<!-- Right Column - Display References -->
+<!-- Middle Column - Display References -->
   <div style="flex: 1; max-width: 800px;">
     <div style="margin-top: 30px;">
       <h3>Articles:</h3>
@@ -202,6 +202,7 @@ My Bibliography Manager
             <div>
               <button onclick="editReference('article', {{article.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
               <button onclick="deleteReference('article', {{article.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="showBibTeX('article', {{article.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
@@ -218,6 +219,7 @@ My Bibliography Manager
             <div>
               <button onclick="editReference('inproceeding', {{inproceeding.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
               <button onclick="deleteReference('inproceeding', {{inproceeding.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="showBibTeX('inproceeding', {{inproceeding.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
@@ -233,6 +235,7 @@ My Bibliography Manager
             <div>
               <button onclick="editReference('book', {{book.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
               <button onclick="deleteReference('book', {{book.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="showBibTeX('book', {{book.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
@@ -248,11 +251,20 @@ My Bibliography Manager
             <div>
               <button onclick="editReference('doi', {{doi.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
               <button onclick="deleteReference('doi', {{doi.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="showBibTeX('doi', {{doi.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
       </ul>
 
+    </div>
+  </div>
+
+  <!-- Right Column - BibTeX Display -->
+  <div id="bibtexDisplay" style="flex: 0 0 400px; display: none;">
+    <div style="position: sticky; top: 20px;">
+      <h3>BibTeX Entry</h3>
+      <pre id="bibtexContent" style="white-space: pre-wrap; background-color: #f5f5f5; padding: 15px; border-radius: 4px; border: 1px solid #ddd;"></pre>
     </div>
   </div>
 </div>
@@ -354,6 +366,23 @@ function editReference(type, id) {
     // Change form action to edit instead of create
     const form = document.querySelector('#referenceForm');
     form.action = `/edit_reference/${type}/${id}`;
+}
+
+function showBibTeX(type, id) {
+    // Show the BibTeX display column
+    const bibtexDisplay = document.getElementById('bibtexDisplay');
+    bibtexDisplay.style.display = 'block';
+
+    // Fetch BibTeX content from server
+    fetch(`/view_bibtex/${type}/${id}`)
+        .then(response => response.text())
+        .then(bibtex => {
+            document.getElementById('bibtexContent').textContent = bibtex;
+        })
+        .catch(error => {
+            console.error('Error fetching BibTeX:', error);
+            document.getElementById('bibtexContent').textContent = 'Error loading BibTeX entry';
+        });
 }
 
 </script>

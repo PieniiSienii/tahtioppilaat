@@ -1,9 +1,10 @@
 class Article:
-    def __init__(self, id, author, title, journal, year):
+    # pylint: disable=too-many-positional-arguments
+    def __init__(self, article_id, author, title, journal, year):
         if not all([author, title, journal, year]):
             raise ValueError(
                 "All fields (author, title, journal, year) are required.")
-        self.id = id
+        self.id = article_id
         self.author = author
         self.title = title
         self.journal = journal

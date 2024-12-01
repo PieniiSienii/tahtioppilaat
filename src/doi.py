@@ -24,14 +24,5 @@ class DOI:
             print(f"Error: {e.stderr.decode('utf-8')}")
             return None
 
-# Create a DOI object
-doi = DOI("1", "10.1038/s41524-017-0032-0")
 
-# Get the BibTeX entry for the DOI
-bibtex = doi.convert_to_bibtex()
 
-# Print the BibTeX entry
-if bibtex:
-    print(bibtex)
-else:
-    print("Failed to fetch BibTeX entry.")

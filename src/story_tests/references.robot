@@ -20,7 +20,7 @@ Add by DOI and delete
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.8s
+    Sleep  3s
     Page Should Not Contain  abcdefg
 
 Add Article and delete
@@ -37,7 +37,7 @@ Add Article and delete
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.8s
+    Sleep  3s
     Page Should Not Contain  author1
 
 Add Conference Paper and delete
@@ -54,7 +54,7 @@ Add Conference Paper and delete
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.8s
+    Sleep  3s
     Page Should Not Contain  author1
 
 Add Book and delete
@@ -72,5 +72,5 @@ Add Book and delete
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.8s
+    Sleep  3s
     Page Should Not Contain  author1

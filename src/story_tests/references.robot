@@ -20,10 +20,10 @@ Add by DOI and delete
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.4s
+    Sleep  0.8s
     Page Should Not Contain  abcdefg
 
-Add Article
+Add Article and delete
     Go To  ${HOME_URL}
     Click Element  add_article
     Input Text  article_author  author1
@@ -37,10 +37,10 @@ Add Article
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.4s
+    Sleep  0.8s
     Page Should Not Contain  author1
 
-Add Conference Paper
+Add Conference Paper and delete
     Go To  ${HOME_URL}
     Click Element  add_conference_paper
     Input Text  inproceeding_author  author1
@@ -54,10 +54,10 @@ Add Conference Paper
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.4s
+    Sleep  0.8s
     Page Should Not Contain  author1
 
-Add Book
+Add Book and delete
     Go To  ${HOME_URL}
     Click Element  add_book
     Input Text  book_author  author1
@@ -72,5 +72,5 @@ Add Book
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
-    Sleep  0.4s
+    Sleep  0.8s
     Page Should Not Contain  author1

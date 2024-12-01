@@ -1,4 +1,5 @@
 class Inproceeding:
+    # pylint: disable=too-many-positional-arguments
     def __init__(self, inproceeding_id, author, title, book_title, year):
         if not all([author, title, book_title, year]):
             raise ValueError(

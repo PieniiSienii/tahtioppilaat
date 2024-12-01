@@ -1,4 +1,5 @@
 class Book:
+    # pylint: disable=too-many-positional-arguments
     def __init__(self, book_id, author, title, book_title, publisher, year):
         if not all([author, title, book_title, publisher, year]):
             raise ValueError(

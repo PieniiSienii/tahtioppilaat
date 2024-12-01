@@ -4,4 +4,4 @@ class DOI:
         self.doi = doi
 
     def __str__(self):
-            return f"{self.doi}"
+        return f"{self.doi}"

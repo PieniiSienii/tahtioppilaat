@@ -1,5 +1,5 @@
-from config import db
 from sqlalchemy import text
+from config import db
 from doi import DOI
 from book import Book
 from article import Article
@@ -70,7 +70,7 @@ def create_reference_doi(reference):
 
 
 def create_reference_book(reference):
-    if reference["author"] != '' and reference["author"] != None:
+    if reference["author"] != '' and reference["author"] is not None:
         sql = text(
             """
             INSERT INTO books (author, title, book_title, publisher, year)
@@ -82,7 +82,7 @@ def create_reference_book(reference):
 
 
 def create_reference_article(reference):
-    if reference["author"] != '' and reference["author"] != None:
+    if reference["author"] != '' and reference["author"] is not None:
         sql = text(
             """
             INSERT INTO articles (author, title, journal, year)
@@ -95,7 +95,7 @@ def create_reference_article(reference):
 
 def create_reference_inproceeding(reference):
     if reference["author"] != '' and\
-       reference["author"] is not None and reference["book_title"] != None:
+       reference["author"] is not None and reference["book_title"] is not None:
         sql = text(
             """
             INSERT INTO inproceedings (author, title, book_title, year)
@@ -187,8 +187,8 @@ def update_article(article_id, article_data):
 
 
 def update_inproceeding(inproceeding_id, inproceeding_data):
-    if (inproceeding_data["author"] != '' and 
-        inproceeding_data["author"] is not None and 
+    if (inproceeding_data["author"] != '' and
+        inproceeding_data["author"] is not None and
         inproceeding_data["book_title"] is not None):
         sql = text("""
             UPDATE inproceedings 

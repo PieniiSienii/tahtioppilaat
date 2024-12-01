@@ -9,11 +9,12 @@ from inproceeding import Inproceeding
 def get_dois():
     # Fetch books from the Books table
     result = db.session.execute(
-        text("SELECT id, doi FROM dois")
+        text("SELECT * FROM dois")
     )
     dois = result.fetchall()
 
     # Map the results to Book objects
+
     return [DOI(doi[0], doi[1]) for doi in dois]
 
 

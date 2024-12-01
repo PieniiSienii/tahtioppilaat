@@ -10,7 +10,7 @@ from config import app, test_env
 @app.route("/", methods=["POST", "GET"])
 def index():
     # Fetch dois (or references) from the database
-    dois = [i.doi for i in get_dois()]
+    dois = get_dois()
     # return render_template("index.html", dois=dois)  # Pass 'dois' instead of 'doi'
     # Fetch books (or references) from the database
     books = get_books()

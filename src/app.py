@@ -4,7 +4,7 @@ from repositories.todo_repository import get_books, create_reference_doi,\
 create_reference_book, create_reference_article,\
 create_reference_inproceeding, get_dois, get_articles, get_inproceedings, \
 delete_doi, delete_book, delete_article, delete_inproceeding, \
-update_doi, update_book, update_article, update_inproceeding
+update_doi, update_book, update_article, update_inproceeding, get_reference
 from config import app, test_env
 
 @app.route("/", methods=["POST", "GET"])
@@ -100,4 +100,11 @@ def edit_reference(reference_type, reference_id):
             "book_title": request.form.get("inproceeding_book_title"),
             "year": request.form.get("inproceeding_year")
         })
+    return redirect("/")
+
+@app.route("/view_bibtex/<reference_type>/<int:reference_id>", methods=["GET"])
+def view_bibtex(reference_type, reference_id):
+    reference = get_reference(reference_type, reference_id)
+
+    print(reference)
     return redirect("/")

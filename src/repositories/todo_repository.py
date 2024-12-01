@@ -5,6 +5,26 @@ from book import Book
 from article import Article
 from inproceeding import Inproceeding
 
+def get_reference(reference_type, id):
+    table = ""
+
+    if reference_type == "doi":
+        table = "dois"
+    elif reference_type == "book":
+        table = "books"
+    elif reference_type == "article":
+        table = "articles"
+    elif reference_type == "inproceeding":
+        table = "inproceedings"
+
+    sql = f"SELECT * FROM {table} WHERE id={id}"
+
+    result = db.session.execute(
+        text(sql)
+    )
+    
+    return result.fetchone()
+
 
 def get_dois():
     # Fetch books from the Books table

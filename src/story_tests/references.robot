@@ -2,20 +2,26 @@
 Resource  resource.robot
 Suite Setup      Open And Configure Browser
 Suite Teardown   Close Browser
-Test Setup       Reset Todos
+Test Setup       Reset References
 
 *** Test Cases ***
-At start there are no todos
+Page loads empty
     Go To  ${HOME_URL}
     Title Should Be  My Bibliography Manager
     Page Should Contain  Manage your scientific references with ease. Select your preferred input method below.
 
-Add by DOI
+Add by DOI and delete
     Go To  ${HOME_URL}
     Click Element  add_by_doi
     Input Text  doi  abcdefg
     Click Button  Add Reference
     Page Should Contain  abcdefg
+    
+    #Delete
+    Click Element  xpath=//button[text()='Delete']
+    Handle Alert  ACCEPT
+    Sleep  0.4s
+    Page Should Not Contain  abcdefg
 
 Add Article
     Go To  ${HOME_URL}
@@ -27,6 +33,12 @@ Add Article
 
     Click Button  Add Reference
     Page Should Contain  title1 by author1 (2024), journal: journal1
+    
+    #Delete
+    Click Element  xpath=//button[text()='Delete']
+    Handle Alert  ACCEPT
+    Sleep  0.4s
+    Page Should Not Contain  author1
 
 Add Conference Paper
     Go To  ${HOME_URL}
@@ -38,6 +50,12 @@ Add Conference Paper
 
     Click Button  Add Reference
     Page Should Contain  title1 by author1 (2024). Book_title: booktitle1
+    
+    #Delete
+    Click Element  xpath=//button[text()='Delete']
+    Handle Alert  ACCEPT
+    Sleep  0.4s
+    Page Should Not Contain  author1
 
 Add Book
     Go To  ${HOME_URL}
@@ -51,4 +69,8 @@ Add Book
     Click Button  Add Reference
     Page Should Contain  title1 by author1 (2024), published by publisher1. Book_title: booktitle1
 
-
+    #Delete
+    Click Element  xpath=//button[text()='Delete']
+    Handle Alert  ACCEPT
+    Sleep  0.4s
+    Page Should Not Contain  author1

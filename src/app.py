@@ -106,7 +106,30 @@ def edit_reference(reference_type, reference_id):
 
 @app.route("/view_bibtex/<reference_type>/<int:reference_id>")
 def view_bibtex(reference_type, reference_id):
-    reference = get_reference(reference_type, reference_id)
-    bibtex = parser.create_bibtex(reference_type, reference)
+    if reference_type == "doi":
+        doi = get_reference(reference_type, reference_id)
+        print(doi)
+        bibtex = convert_to_bibtex(doi.doi)  # Ensure doi.doi is passed, not the DOI object
+        print(doi.doi)
+    else:
+        reference = get_reference(reference_type, reference_id)
+        bibtex = parser.create_bibtex(reference_type, reference)
     
     return bibtex
+
+import subprocess
+
+def convert_to_bibtex(doi):
+    # Use subprocess to call the 'doi2bib' command
+    try:
+        result = subprocess.run(
+            ['doi2bib', doi],
+            check=True,  # Raise an exception if the command fails
+            stdout=subprocess.PIPE,  # Capture the standard output
+            stderr=subprocess.PIPE  # Capture the standard error
+        )
+        # Return the BibTeX result
+        return result.stdout.decode('utf-8')  # Convert bytes to string
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e.stderr.decode('utf-8')}")
+        return None

@@ -6,6 +6,7 @@ create_reference_inproceeding, get_dois, get_articles, get_inproceedings, \
 delete_doi, delete_book, delete_article, delete_inproceeding, \
 update_doi, update_book, update_article, update_inproceeding, get_reference
 from config import app, test_env
+import parser
 
 @app.route("/", methods=["POST", "GET"])
 def index():
@@ -105,39 +106,7 @@ def edit_reference(reference_type, reference_id):
 
 @app.route("/view_bibtex/<reference_type>/<int:reference_id>")
 def view_bibtex(reference_type, reference_id):
-    bibtex = ""
-    if reference_type == "article":
-        article = get_reference(reference_type, reference_id)
-        if article:
-            bibtex = f"""@article{{{article.id},
-    author = {{{article.author}}},
-    title = {{{article.title}}},
-    journal = {{{article.journal}}},
-    year = {{{article.year}}}
-}}"""
-    elif reference_type == "book":
-        book = get_reference(reference_type, reference_id)
-        if book:
-            bibtex = f"""@book{{{book.id},
-    author = {{{book.author}}},
-    title = {{{book.title}}},
-    publisher = {{{book.publisher}}},
-    year = {{{book.year}}}
-}}"""
-    elif reference_type == "inproceeding":
-        inproceeding = get_reference(reference_type, reference_id)
-        if inproceeding:
-            bibtex = f"""@inproceedings{{{inproceeding.id},
-    author = {{{inproceeding.author}}},
-    title = {{{inproceeding.title}}},
-    booktitle = {{{inproceeding.book_title}}},
-    year = {{{inproceeding.year}}}
-}}"""
-    elif reference_type == "doi":
-        doi = get_reference(reference_type, reference_id)
-        if doi:
-            bibtex = f"""@misc{{{doi.id},
-    doi = {{{doi.doi}}}
-}}"""
+    reference = get_reference(reference_type, reference_id)
+    bibtex = parser.create_bibtex(reference_type, reference)
     
     return bibtex

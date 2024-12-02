@@ -1,40 +1,6 @@
-// references.js
+'use strict';
 
-// Add event listeners to ensure only one section is open at a time
-document.addEventListener('DOMContentLoaded', function() {
-    const detailsElements = document.querySelectorAll('details');
-    
-    detailsElements.forEach(details => {
-        details.addEventListener('click', (e) => {
-            if (e.target.tagName === 'SUMMARY') {
-                detailsElements.forEach(otherDetails => {
-                    if (otherDetails !== details) {
-                        otherDetails.removeAttribute('open');
-                    }
-                });
-            }
-        });
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const detailsElements = document.querySelectorAll('details');
-    
-    detailsElements.forEach(details => {
-        details.addEventListener('click', (e) => {
-            if (e.target.tagName === 'SUMMARY') {
-                detailsElements.forEach(otherDetails => {
-                    if (otherDetails !== details) {
-                        otherDetails.removeAttribute('open');
-                    }
-                });
-            }
-        });
-    });
-});
-
-// Add the new functions for edit and delete
+// Define all functions first
 function deleteReference(type, id) {
     if (confirm('Are you sure you want to delete this reference?')) {
         fetch(`/delete_reference/${type}/${id}`, {
@@ -113,3 +79,25 @@ function showBibTeX(type, id) {
             document.getElementById('bibtexContent').textContent = 'Error loading BibTeX entry';
         });
 }
+
+// Make functions globally available
+window.deleteReference = deleteReference;
+window.editReference = editReference;
+window.showBibTeX = showBibTeX;
+
+// DOM Content Loaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    const detailsElements = document.querySelectorAll('details');
+    
+    detailsElements.forEach(details => {
+        details.addEventListener('click', (e) => {
+            if (e.target.tagName === 'SUMMARY') {
+                detailsElements.forEach(otherDetails => {
+                    if (otherDetails !== details) {
+                        otherDetails.removeAttribute('open');
+                    }
+                });
+            }
+        });
+    });
+});

@@ -63,7 +63,7 @@ function editReference(type, id) {
     form.action = `/edit_reference/${type}/${id}`;
 }
 
-function showBibTeX(type, id) {
+function viewBibTeX(type, id) {
     // Show the BibTeX display column
     const bibtexDisplay = document.getElementById('bibtexDisplay');
     bibtexDisplay.style.display = 'block';
@@ -83,7 +83,7 @@ function showBibTeX(type, id) {
 // Make functions globally available
 window.deleteReference = deleteReference;
 window.editReference = editReference;
-window.showBibTeX = showBibTeX;
+window.viewBibTeX = viewBibTeX;
 
 // DOM Content Loaded event listener
 document.addEventListener('DOMContentLoaded', function() {

@@ -116,15 +116,32 @@ window.copyBibTeX = copyBibTeX;
 // DOM Content Loaded event listener
 document.addEventListener('DOMContentLoaded', function() {
     const detailsElements = document.querySelectorAll('details');
+    const form = document.querySelector('#referenceForm');
     
     detailsElements.forEach(details => {
         details.addEventListener('click', (e) => {
             if (e.target.tagName === 'SUMMARY') {
+                // Reset form when closing a section
+                if (!details.hasAttribute('open')) {
+                    form.reset();
+                }
+                
+                // Close other sections and reset form when opening a new section
                 detailsElements.forEach(otherDetails => {
                     if (otherDetails !== details) {
                         otherDetails.removeAttribute('open');
+                        form.reset();
                     }
                 });
+            }
+        });
+    });
+
+    // Also reset form when any details section is closed directly
+    detailsElements.forEach(details => {
+        details.addEventListener('toggle', (e) => {
+            if (!details.hasAttribute('open')) {
+                form.reset();
             }
         });
     });

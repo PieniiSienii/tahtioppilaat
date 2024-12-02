@@ -80,10 +80,38 @@ function viewBibTeX(type, id) {
         });
 }
 
+function copyBibTeX() {
+    const bibtexContent = document.getElementById('bibtexContent').textContent;
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(bibtexContent)
+        .then(() => {
+            const button = document.querySelector('#bibtexDisplay button');
+            const originalText = button.innerHTML;
+            
+            // Show feedback
+            button.innerHTML = 'Copied!';
+            button.style.backgroundColor = '#4CAF50';
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.backgroundColor = '#2196F3';
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+            alert('Failed to copy to clipboard');
+        });
+}
+
+
+
 // Make functions globally available
 window.deleteReference = deleteReference;
 window.editReference = editReference;
 window.viewBibTeX = viewBibTeX;
+window.copyBibTeX = copyBibTeX;
 
 // DOM Content Loaded event listener
 document.addEventListener('DOMContentLoaded', function() {

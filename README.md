@@ -4,22 +4,47 @@
 
 [Backlog linkki](https://docs.google.com/spreadsheets/d/1tfCgtgHHC6YhraJJi992deDDh6dO0IaimUXH1h2Ntps/edit?gid=0#gid=0)
 
-Definition of done: 
+### Definition of done: 
 
 Ohjelma toimii niin kuin user story kuvaa, koodia on testattu, jonka jälkeen löydetyt ongelmat korjattu.
 
 
-Käyttöohje:
+### Käyttöohje:
 
-Kloonaa repositorio
+1. **Kloonaa repositorio**:
 
-Lataa poetry: pip install poetry
+```bash
+git clone https://github.com/PieniiSienii/tahtioppilaat.git
+```
 
-Lataa riippuvuudet: poetry install
+2. **Lataa poetry**:
 
-Luo .env tiedosto, josta löytyy DATABASE_URL, TEST_ENV ja SECRET_KEY
+```bash
+pip install poetry
+```
 
-Luo virtuaaliympäristö:poetry shell
+3. **Lataa riippuvuudet**: 
 
-Käynnistä ohjelma: python3 src/index.py
+```bash
+poetry install
+```
 
+4. **Luo .env tiedosto, josta löytyy DATABASE_URL, TEST_ENV ja SECRET_KEY**:
+
+```bash
+DATABASE_URL=postgresql://<your_database_service>
+TEST_ENV=true
+SECRET_KEY=<your_own_secret>
+```
+
+5. **Luo virtuaaliympäristö**:
+
+```bash
+poetry shell
+```
+
+6. **Käynnistä ohjelma**:
+
+```bash
+python3 src/index.py
+```

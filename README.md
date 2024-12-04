@@ -32,7 +32,9 @@ poetry install
 4. **Luo .env tiedosto, josta löytyy DATABASE_URL, TEST_ENV ja SECRET_KEY**:
 
 ```bash
-poetry install
+DATABASE_URL=postgresql://<your_database_service>
+TEST_ENV=true
+SECRET_KEY=<your_own_secret>
 ```
 
 5. **Luo virtuaaliympäristö**:

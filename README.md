@@ -22,4 +22,3 @@ Luo .env tiedosto, josta löytyy DATABASE_URL, TEST_ENV ja SECRET_KEY
 Luo virtuaaliympäristö:poetry shell
 
 Käynnistä ohjelma: python3 src/index.py
-

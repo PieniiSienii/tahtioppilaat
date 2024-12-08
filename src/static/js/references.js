@@ -105,6 +105,33 @@ function copyBibTeX() {
         });
 }
 
+async function exportAllBibTeX() {
+    try {
+        // Fetch BibTeX content from your export route
+        const response = await fetch('/export_all_bibtex');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const bibtexContent = await response.text();
+        
+        // Create and trigger download
+        const blob = new Blob([bibtexContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'references.bib';
+        
+        // Append link, trigger download, and cleanup
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error exporting BibTeX:', error);
+        alert('Failed to export BibTeX file. Please try again.');
+    }
+}
+
 
 
 // Make functions globally available

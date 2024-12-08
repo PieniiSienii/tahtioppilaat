@@ -2,34 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>{% block title %}{% endblock %}</title>
+    
+    <!-- Link to Google Fonts (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
       /* General Styling */
       body {
         background-color: #121212;
         color: #e0e0e0;
-        font-family: Arial, sans-serif;
+        font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
         margin: 0;
         padding: 0;
       }
       h2, h3 {
         color: #ffffff;
+        font-family: 'Montserrat', sans-serif; /* Apply Montserrat font to headings */
+
       }
       p {
         color: #bdbdbd;
+        font-family: 'Montserrat', sans-serif; /* Apply Montserrat font to paragraphs */
       }
 
       /* Adjust Title and Description Spacing */
       h2 {
-        margin-left: 10px; /* Adjust this value as needed */
+        margin-left: 15px; /* Slightly adjust this value to move the title to the right */
+        font-weight: 300;
       }
 
       p {
-        margin-left: 10px; /* Adjust this value as needed */
+        margin-left: 15px; /* Slightly adjust this value to move the description to the right */
       }
 
       /* Forms */

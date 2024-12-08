@@ -5,7 +5,15 @@ My Bibliography Manager
 {% endblock %}
 
 {% block body %}
-<h2>My Bibliography Manager</h2>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+  <h2>My Bibliography Manager</h2>
+  <button 
+    onclick="toggleTheme()" 
+    style="padding: 8px 16px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;"
+  >
+    <span id="theme-icon">🌙</span> Toggle Theme
+  </button>
+</div>
 
 <div>
   <p>Manage your scientific references with ease. Select your preferred input method below.</p>

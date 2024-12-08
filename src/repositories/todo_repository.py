@@ -25,6 +25,22 @@ def get_reference(reference_type, id):
     
     return result.fetchone()
 
+def get_all_references():
+    # Get references from each table
+    dois = get_dois()
+    books = get_books()
+    articles = get_articles()
+    inproceedings = get_inproceedings()
+    
+    # Combine all references into one list
+    all_references = {
+        'dois': dois,
+        'books': books,
+        'articles': articles,
+        'inproceedings': inproceedings
+    }
+    
+    return all_references
 
 def get_dois():
     # Fetch books from the Books table

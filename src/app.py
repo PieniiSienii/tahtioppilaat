@@ -4,9 +4,11 @@ from repositories.todo_repository import get_books, create_reference_doi,\
 create_reference_book, create_reference_article,\
 create_reference_inproceeding, get_dois, get_articles, get_inproceedings, \
 delete_doi, delete_book, delete_article, delete_inproceeding, \
-update_doi, update_book, update_article, update_inproceeding, get_reference
+update_doi, update_book, update_article, update_inproceeding, get_reference, \
+get_all_references
 from config import app, test_env
 import parser
+from flask import jsonify, Response
 
 @app.route("/", methods=["POST", "GET"])
 def index():
@@ -116,3 +118,73 @@ def view_bibtex(reference_type, reference_id):
         bibtex = parser.create_bibtex(reference_type, reference)
     
     return bibtex
+
+
+@app.route("/export_all_bibtex", methods=["GET"])
+def export_all_bibtex():
+    try:
+        # Get all references and separate them by type
+        references = get_all_references()
+        dois = references['dois']
+        books = references['books']
+        articles = references['articles']
+        inproceedings = references['inproceedings']
+
+        bibtex_entries = []
+        
+        # Process Books
+        for book in books:
+            # For books: ID, author, title, booktitle, publisher, year
+            contents = [
+                book.id,  # contents[0] - not used in create_bibtex
+                book.author,
+                book.title,
+                book.book_title,
+                book.publisher,
+                book.year
+            ]
+            entry = parser.create_bibtex('book', contents)
+            if entry:
+                bibtex_entries.append(entry)
+        
+        # Process Articles
+        for article in articles:
+            # For articles: ID, author, title, journal, year
+            contents = [
+                article.id,  # contents[0] - not used in create_bibtex
+                article.author,
+                article.title,
+                article.journal,
+                article.year
+            ]
+            entry = parser.create_bibtex('article', contents)
+            if entry:
+                bibtex_entries.append(entry)
+        
+        # Process Inproceedings
+        for inproceeding in inproceedings:
+            # For inproceedings: ID, author, title, booktitle, year
+            contents = [
+                inproceeding.id,  # contents[0] - not used in create_bibtex
+                inproceeding.author,
+                inproceeding.title,
+                inproceeding.book_title,
+                inproceeding.year
+            ]
+            entry = parser.create_bibtex('inproceeding', contents)
+            if entry:
+                bibtex_entries.append(entry)
+        
+        # DOIs are currently not implemented in parser
+        
+        if not bibtex_entries:
+            return jsonify({"error": "No valid BibTeX entries could be created"}), 404
+            
+        combined_bibtex = '\n'.join(filter(None, bibtex_entries))
+        return Response(combined_bibtex, mimetype='text/plain')
+        
+    except Exception as e:
+        print(f"Error in export_all_bibtex: {str(e)}")
+        import traceback
+        print(traceback.format_exc())
+        return jsonify({"error": str(e)}), 500

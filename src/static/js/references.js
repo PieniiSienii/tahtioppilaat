@@ -126,31 +126,45 @@ function copyBibTeX() {
 
 async function exportAllBibTeX() {
     try {
-        // Fetch BibTeX content from your export route
         const response = await fetch('/export_all_bibtex');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const bibtexContent = await response.text();
         
-        // Create and trigger download
+        // Check content type of response
+        const contentType = response.headers.get('content-type');
+        console.log('Response content type:', contentType);  // Debug log
+        
+        if (!response.ok) {
+            if (contentType && contentType.includes('application/json')) {
+                const errorData = await response.json();
+                throw new Error(errorData.error);
+            } else {
+                const text = await response.text();
+                console.error('Server response:', text);  // Debug log
+                throw new Error(`Server error: ${response.status}`);
+            }
+        }
+        
+        const bibtexContent = await response.text();
+        console.log('Received content:', bibtexContent);  // Debug log
+        
+        if (!bibtexContent.trim()) {
+            throw new Error('No BibTeX content generated');
+        }
+        
         const blob = new Blob([bibtexContent], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
         link.download = 'references.bib';
         
-        // Append link, trigger download, and cleanup
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
     } catch (error) {
         console.error('Error exporting BibTeX:', error);
-        alert('Failed to export BibTeX file. Please try again.');
+        alert(`Failed to export BibTeX file: ${error.message}`);
     }
 }
-
 
 
 // Make functions globally available

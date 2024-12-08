@@ -64,9 +64,28 @@ function editReference(type, id) {
 }
 
 function viewBibTeX(type, id) {
-    // Show the BibTeX display column
     const bibtexDisplay = document.getElementById('bibtexDisplay');
+    const currentButton = event.target; // Get the button that was clicked
+    
+    // If display is already visible and we're clicking the same reference, hide it
+    if (bibtexDisplay.style.display === 'block' && 
+        bibtexDisplay.dataset.currentRef === `${type}-${id}`) {
+        bibtexDisplay.style.display = 'none';
+        currentButton.style.backgroundColor = '#2196F3'; // Reset button color
+        return;
+    }
+
+    // Show the display and mark this as the current reference
     bibtexDisplay.style.display = 'block';
+    bibtexDisplay.dataset.currentRef = `${type}-${id}`;
+    
+    // Reset all BibTeX buttons to default color
+    document.querySelectorAll('button[onclick^="viewBibTeX"]').forEach(btn => {
+        btn.style.backgroundColor = '#2196F3';
+    });
+    
+    // Highlight the current button
+    currentButton.style.backgroundColor = '#1565C0'; // Darker blue for active state
 
     // Fetch BibTeX content from server
     fetch(`/view_bibtex/${type}/${id}`)

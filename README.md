@@ -23,3 +23,4 @@ Luo virtuaaliympäristö:poetry shell
 
 Käynnistä ohjelma: python3 src/index.py
 
+

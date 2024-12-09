@@ -74,7 +74,7 @@ def get_articles():
 
     # Map the results to Book objects
     return [Article(article[0], article[1], article[2],\
-                     article[3], article[4], article[4]) for article in articles]
+                     article[3], article[4], article[5]) for article in articles]
 
 
 def get_inproceedings():

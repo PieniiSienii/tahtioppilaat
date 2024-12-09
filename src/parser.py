@@ -13,33 +13,33 @@ def create_bibtex(entrytype, contents):
         return None
     
     elif entrytype == "book":
-        print(contents)
+        print("AAAAAAAAAAAAAAA", contents)
         entry = {
             'ENTRYTYPE': entrytype,
-            'ID': contents[0],
-            'author': contents[1],
-            'title': contents[2],
-            'booktitle': contents[3],
-            'publisher': contents[4],
-            'year': str(contents[5])
+            'ID': contents[1],
+            'author': contents[2],
+            'title': contents[3],
+            'booktitle': contents[4],
+            'publisher': contents[5],
+            'year': str(contents[6])
         }
     elif entrytype == "article":
         entry = {
             'ENTRYTYPE': entrytype,
-            'ID': contents[0],
-            'author': contents[1],
-            'title': contents[2],
-            'journal': contents[3],
-            'year': str(contents[4])
+            'ID': contents[1],
+            'author': contents[2],
+            'title': contents[3],
+            'journal': contents[4],
+            'year': str(contents[5])
         }
     elif entrytype == "inproceeding":
         entry = {
             'ENTRYTYPE': entrytype,
-            'ID': contents[0],
-            'author': contents[1],
-            'title': contents[2],
-            'booktitle': contents[3],
-            'year': str(contents[4])
+            'ID': contents[1],
+            'author': contents[2],
+            'title': contents[3],
+            'booktitle': contents[4],
+            'year': str(contents[5])
         }
 
     db.entries = [entry]

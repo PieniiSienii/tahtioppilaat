@@ -33,6 +33,7 @@ def reference_creation():
 
     # Handle manual entry case
     book_reference = {
+        "citation_key": request.form.get("book_citation_key"),
         "author": request.form.get("book_author"),
         "title": request.form.get("book_title"),
         "book_title": request.form.get("book_book_title"),
@@ -40,12 +41,14 @@ def reference_creation():
         "year": request.form.get("book_year")
     }
     article_reference = {
+        "citation_key": request.form.get("article_citation_key"),
         "author": request.form.get("article_author"),
         "title": request.form.get("article_title"),
         "journal": request.form.get("article_journal"),
         "year": request.form.get("article_year")
     }
     inproceeding_reference = {
+        "citation_key": request.form.get("inproceeding_citation_key"),
         "author": request.form.get("inproceeding_author"),
         "title": request.form.get("inproceeding_title"),
         "book_title": request.form.get("inproceeding_book_title"),
@@ -83,6 +86,7 @@ def edit_reference(reference_type, reference_id):
         update_doi(reference_id, request.form.get("doi"))
     elif reference_type == "book":
         update_book(reference_id, {
+            "citation_key": request.form.get("book_citation_key"),
             "author": request.form.get("book_author"),
             "title": request.form.get("book_title"),
             "book_title": request.form.get("book_book_title"),
@@ -91,6 +95,7 @@ def edit_reference(reference_type, reference_id):
         })
     elif reference_type == "article":
         update_article(reference_id, {
+            "citation_key": request.form.get("article_citation_key"),
             "author": request.form.get("article_author"),
             "title": request.form.get("article_title"),
             "journal": request.form.get("article_journal"),
@@ -98,6 +103,7 @@ def edit_reference(reference_type, reference_id):
         })
     elif reference_type == "inproceeding":
         update_inproceeding(reference_id, {
+            "citation_key": request.form.get("inproceeding_citation_key"),
             "author": request.form.get("inproceeding_author"),
             "title": request.form.get("inproceeding_title"),
             "book_title": request.form.get("inproceeding_book_title"),
@@ -137,6 +143,7 @@ def export_all_bibtex():
             # For books: ID, author, title, booktitle, publisher, year
             contents = [
                 book.id,  # contents[0] - not used in create_bibtex
+                article.citation_key,
                 book.author,
                 book.title,
                 book.book_title,
@@ -152,6 +159,7 @@ def export_all_bibtex():
             # For articles: ID, author, title, journal, year
             contents = [
                 article.id,  # contents[0] - not used in create_bibtex
+                article.citation_key,
                 article.author,
                 article.title,
                 article.journal,
@@ -166,6 +174,7 @@ def export_all_bibtex():
             # For inproceedings: ID, author, title, booktitle, year
             contents = [
                 inproceeding.id,  # contents[0] - not used in create_bibtex
+                article.citation_key,
                 inproceeding.author,
                 inproceeding.title,
                 inproceeding.book_title,

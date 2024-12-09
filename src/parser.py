@@ -16,7 +16,7 @@ def create_bibtex(entrytype, contents):
         print(contents)
         entry = {
             'ENTRYTYPE': entrytype,
-            'ID': 'none',
+            'ID': contents[0],
             'author': contents[1],
             'title': contents[2],
             'booktitle': contents[3],
@@ -26,7 +26,7 @@ def create_bibtex(entrytype, contents):
     elif entrytype == "article":
         entry = {
             'ENTRYTYPE': entrytype,
-            'ID': 'none',
+            'ID': contents[0],
             'author': contents[1],
             'title': contents[2],
             'journal': contents[3],
@@ -35,7 +35,7 @@ def create_bibtex(entrytype, contents):
     elif entrytype == "inproceeding":
         entry = {
             'ENTRYTYPE': entrytype,
-            'ID': 'none',
+            'ID': contents[0],
             'author': contents[1],
             'title': contents[2],
             'booktitle': contents[3],
@@ -76,3 +76,10 @@ def append_bibtex_entry(file_path, entry_str):
     writer = BibTexWriter()
     with open(file_path, 'w') as bibtex_file:
         bibtex_file.write(writer.write(bib_database))
+
+
+def read_bibtex_file(file):
+    with open(file) as bibtex_file:
+        bib_database = bibtexparser.load(bibtex_file)
+
+    print(bib_database.entries)

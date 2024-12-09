@@ -95,6 +95,7 @@ def setup_db():
     sql_str = (
         f"CREATE TABLE {BOOKS_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
+        "  citacion_key TEXT NOT NULL, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
         "  book_title TEXT NOT NULL, "
@@ -110,6 +111,7 @@ def setup_db():
     sql_str = (
         f"CREATE TABLE {ARTICLES_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
+        "  citacion_key TEXT NOT NULL, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
         "  journal TEXT NOT NULL, "
@@ -124,6 +126,7 @@ def setup_db():
     sql_str = (
         f"CREATE TABLE {INPROCEEDINGS_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
+        "  citacion_key TEXT NOT NULL, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
         "  book_title TEXT NOT NULL, "

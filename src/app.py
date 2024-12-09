@@ -70,45 +70,47 @@ if test_env:
 
 @app.route("/delete_reference/<reference_type>/<int:reference_id>", methods=["POST"])
 def delete_reference(reference_type, reference_id):
-    if reference_type == "doi":
-        delete_doi(reference_id)
-    elif reference_type == "book":
-        delete_book(reference_id)
-    elif reference_type == "article":
-        delete_article(reference_id)
-    elif reference_type == "inproceeding":
-        delete_inproceeding(reference_id)
+    match reference_type:
+        case "doi":
+            delete_doi(reference_id)
+        case "book":
+            delete_book(reference_id)
+        case "article":
+            delete_article(reference_id)
+        case "inproceeding":
+            delete_inproceeding(reference_id)
     return redirect("/")
 
 @app.route("/edit_reference/<reference_type>/<int:reference_id>", methods=["POST"])
 def edit_reference(reference_type, reference_id):
-    if reference_type == "doi":
-        update_doi(reference_id, request.form.get("doi"))
-    elif reference_type == "book":
-        update_book(reference_id, {
-            "citation_key": request.form.get("book_citation_key"),
-            "author": request.form.get("book_author"),
-            "title": request.form.get("book_title"),
-            "book_title": request.form.get("book_book_title"),
-            "publisher": request.form.get("book_publisher"),
-            "year": request.form.get("book_year")
-        })
-    elif reference_type == "article":
-        update_article(reference_id, {
-            "citation_key": request.form.get("article_citation_key"),
-            "author": request.form.get("article_author"),
-            "title": request.form.get("article_title"),
-            "journal": request.form.get("article_journal"),
-            "year": request.form.get("article_year")
-        })
-    elif reference_type == "inproceeding":
-        update_inproceeding(reference_id, {
-            "citation_key": request.form.get("inproceeding_citation_key"),
-            "author": request.form.get("inproceeding_author"),
-            "title": request.form.get("inproceeding_title"),
-            "book_title": request.form.get("inproceeding_book_title"),
-            "year": request.form.get("inproceeding_year")
-        })
+    match reference_type:
+        case "doi":
+            update_doi(reference_id, request.form.get("doi"))
+        case "book":
+            update_book(reference_id, {
+                "citation_key": request.form.get("book_citation_key"),
+                "author": request.form.get("book_author"),
+                "title": request.form.get("book_title"),
+                "book_title": request.form.get("book_book_title"),
+                "publisher": request.form.get("book_publisher"),
+                "year": request.form.get("book_year")
+            })
+        case "article":
+            update_article(reference_id, {
+                "citation_key": request.form.get("article_citation_key"),
+                "author": request.form.get("article_author"),
+                "title": request.form.get("article_title"),
+                "journal": request.form.get("article_journal"),
+                "year": request.form.get("article_year")
+            })
+        case "inproceeding":
+            update_inproceeding(reference_id, {
+                "citation_key": request.form.get("inproceeding_citation_key"),
+                "author": request.form.get("inproceeding_author"),
+                "title": request.form.get("inproceeding_title"),
+                "book_title": request.form.get("inproceeding_book_title"),
+                "year": request.form.get("inproceeding_year")
+            })
     return redirect("/")
 
 

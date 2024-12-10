@@ -166,12 +166,28 @@ async function exportAllBibTeX() {
     }
 }
 
+function searchReferences() {
+    const searchTerm = document.getElementById('referenceSearch').value.toLowerCase();
+    const references = document.querySelectorAll('li[id^="reference-"]');
+    
+    references.forEach(reference => {
+        const text = reference.querySelector('span').textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            reference.style.display = 'flex';
+        } else {
+            reference.style.display = 'none';
+        }
+    });
+}
+
 
 // Make functions globally available
 window.deleteReference = deleteReference;
 window.editReference = editReference;
 window.viewBibTeX = viewBibTeX;
 window.copyBibTeX = copyBibTeX;
+window.exportAllBibTeX = exportAllBibTeX;
+window.searchReferences = searchReferences;
 
 // DOM Content Loaded event listener
 document.addEventListener('DOMContentLoaded', function() {

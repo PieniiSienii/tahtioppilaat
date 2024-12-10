@@ -15,25 +15,32 @@ Add by DOI, BibTeX, edit and delete
     Click Element  add_by_doi
     Input Text  doi  10.1145/1968.1972
     Click Button  Add Reference
-    Page Should Contain  10.1145/1968.1972
+    Page Should Contain  A theory of the learnable 
 
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
     Sleep  3s
-    Page Should Contain  @article{Valiant_1984, title={A theory of the learnable}, volume={27}, ISSN={1557-7317}, url={http://dx.doi.org/10.1145/1968.1972}\, DOI={10.1145/1968.1972}, number={11}, journal={Communications of the ACM}, publisher={Association for Computing Machinery (ACM)}, author={Valiant, L. G.}, year={1984}, month=nov, pages={1134–1142} }
+    Page Should Contain  @article{,
+    Page Should Contain  author = {Valiant, L. G.},
+    Page Should Contain  journal = {Communications of the ACM},
+    Page Should Contain  title = {A theory of the learnable},
+    Page Should Contain  year = {1984}
 
 
     #Edit
     Click Element  xpath=//button[text()='Edit']
-    Input Text  doi  gfedcba
+    Input Text  article_author  author2
+    Input Text  article_title  title2
+    Input Text  article_journal  journal2
+    Input Text  article_year  2023
     Click Button  Add Reference
-    Page Should Contain  gfedcba
+    Page Should Contain  title2 by author2 (2023), journal: journal2
 
     #Delete
     Click Element  xpath=//button[text()='Delete']
     Handle Alert  ACCEPT
     Sleep  3s
-    Page Should Not Contain  gfedcba
+    Page Should Not Contain  A theory of the learnable 
 
 Add Article, BibTeX, edit and delete
     Go To  ${HOME_URL}

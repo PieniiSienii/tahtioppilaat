@@ -302,23 +302,6 @@ My Bibliography Manager
       </ul>
 
       
-      <ul style="list-style: none; padding: 0;">
-        {% for doi in dois %}
-          <li id="reference-doi-{{doi.id}}"
-              data-doi="{{doi.doi}}"
-              style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-            <span>{{doi}}</span>
-            <div>
-              <button onclick="editReference('doi', {{doi.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-              <button onclick="deleteReference('doi', {{doi.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-              <button onclick="viewBibTeX('doi', {{doi.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-
-    </div>
-  </div>
 
   <!-- Right Column - BibTeX Display -->
   <div id="bibtexDisplay" style="flex: 0 0 400px; display: none;" data-current-ref="">

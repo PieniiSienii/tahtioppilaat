@@ -240,6 +240,18 @@ My Bibliography Manager
 <!-- Middle Column - Display References -->
   <div style="flex: 1; max-width: 800px;">
     <div style="margin-top: 30px;">
+      <!-- Search Bar -->
+      <div style="margin-bottom: 30px; text-align: center;">
+        <div style="display: inline-block; width: 100%; max-width: 600px;">
+          <input 
+            type="text" 
+            id="referenceSearch" 
+            placeholder="Search references..." 
+            style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;"
+            oninput="searchReferences()"
+          >
+        </div>
+      </div>
       <h3>Articles:</h3>
       <ul style="list-style: none; padding: 0;">
         {% for article in articles %}

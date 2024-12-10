@@ -49,7 +49,7 @@ Add Article, BibTeX, edit and delete
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
     Sleep  3s
-    Page Should Contain  @article{none,
+    Page Should Contain  @article{,
     Page Should Contain  author = {author1},
     Page Should Contain  journal = {journal1},
     Page Should Contain  title = {title1},
@@ -84,7 +84,7 @@ Add Conference Paper, BibTeX, edit and delete
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
     Sleep  3s
-    Page Should Contain  @inproceeding{none,
+    Page Should Contain  @inproceeding{,
     Page Should Contain  author = {author1},
     Page Should Contain  booktitle = {booktitle1},
     Page Should Contain  title = {title1},
@@ -120,7 +120,7 @@ Add Book, BibTeX, edit and delete
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
     Sleep  3s
-    Page Should Contain  @book{none,
+    Page Should Contain  @book{,
     Page Should Contain  author = {author1},
     Page Should Contain  booktitle = {booktitle1},
     Page Should Contain  publisher = {publisher1},

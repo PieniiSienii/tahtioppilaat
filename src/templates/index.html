@@ -221,7 +221,7 @@ My Bibliography Manager
       <div style="margin-top: 20px; margin-left: 10px; display: flex; gap: 10px;">
         <button 
           type="submit" 
-          style="padding: 8px 16px; background-color: #60a060; color: white; border: none; border-radius: 4px; cursor: pointer;"
+          style="padding: 8px 16px; background-color: #779877; color: white; border: none; border-radius: 4px; cursor: pointer;"
           onclick="return true"
         >
           Add Reference
@@ -229,7 +229,7 @@ My Bibliography Manager
         <button 
           type="button"
           onclick="exportAllBibTeX()"
-          style="padding: 8px 16px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;"
+          style="padding: 8px 16px; background-color: #7ba9d2; color: white; border: none; border-radius: 4px; cursor: pointer;"
         >
           Export BibTeX
         </button>
@@ -248,9 +248,9 @@ My Bibliography Manager
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{article}}</span>
             <div>
-              <button onclick="editReference('article', {{article.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-              <button onclick="deleteReference('article', {{article.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-              <button onclick="viewBibTeX('article', {{article.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
+              <button onclick="editReference('article', {{article.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #7db77f; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
+              <button onclick="deleteReference('article', {{article.id}})" style="padding: 5px 10px; background-color: #db726b; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="viewBibTeX('article', {{article.id}})" style="padding: 5px 10px; background-color: #65abe5; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}

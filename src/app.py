@@ -28,8 +28,21 @@ def index():
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
+
     # Handle doi case
-    doi_reference = request.form.get("doi")
+    reference_by_doi = parser.convert_to_bibtex(request.form.get("doi"))
+
+    if reference_by_doi:
+        reference_by_doi["citation_key"] = request.form.get("doi_citation_key")
+        match reference_by_doi["ENTRYTYPE"]:
+            case "book":
+                create_reference_book(reference_by_doi)
+            case "article":
+                create_reference_article(reference_by_doi)
+            case "inproceeding":
+                create_reference_inproceeding(reference_by_doi)
+            case _:
+                pass
 
     # Handle manual entry case
     book_reference = {
@@ -55,7 +68,7 @@ def reference_creation():
         "year": request.form.get("inproceeding_year"),
     }
     # Save reference to database
-    create_reference_doi(doi_reference)
+    # create_reference_doi(doi_reference)
     create_reference_book(book_reference)
     create_reference_article(article_reference)
     create_reference_inproceeding(inproceeding_reference)

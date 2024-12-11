@@ -106,7 +106,7 @@ def create_reference_doi(reference):
 
 
 def create_reference_book(reference):
-    if reference["author"] != '' and reference["author"] is not None:
+    if check_reference_isnot_none(reference):
         sql = text(
             """
             INSERT INTO books (citation_key, author, title, book_title, publisher, year)
@@ -118,7 +118,7 @@ def create_reference_book(reference):
 
 
 def create_reference_article(reference):
-    if reference["author"] != '' and reference["author"] is not None:
+    if check_reference_isnot_none(reference):
         sql = text(
             """
             INSERT INTO articles (citation_key, author, title, journal, year)
@@ -130,8 +130,7 @@ def create_reference_article(reference):
 
 
 def create_reference_inproceeding(reference):
-    if reference["author"] != '' and\
-       reference["author"] is not None and reference["book_title"] is not None:
+    if check_reference_isnot_none(reference):
         sql = text(
             """
             INSERT INTO inproceedings (citation_key, author, title, book_title, year)
@@ -248,3 +247,9 @@ def update_inproceeding(inproceeding_id, inproceeding_data):
             "year": inproceeding_data["year"]
         })
         db.session.commit()
+
+def check_reference_isnot_none(reference):
+    for field in reference.values():
+        if field == '' or field == None:
+            return False
+    return True

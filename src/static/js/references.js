@@ -47,13 +47,13 @@ function editReference(type, id) {
         } else if (type === 'book') {
             document.querySelector('#book_author').value = reference.dataset.author;
             document.querySelector('#book_title').value = reference.dataset.title;
-            document.querySelector('#book_book_title').value = reference.dataset.bookTitle;
+            document.querySelector('#book_booktitle').value = reference.dataset.bookTitle;
             document.querySelector('#book_publisher').value = reference.dataset.publisher;
             document.querySelector('#book_year').value = reference.dataset.year;
         } else if (type === 'inproceeding') {
             document.querySelector('#inproceeding_author').value = reference.dataset.author;
             document.querySelector('#inproceeding_title').value = reference.dataset.title;
-            document.querySelector('#inproceeding_book_title').value = reference.dataset.bookTitle;
+            document.querySelector('#inproceeding_booktitle').value = reference.dataset.bookTitle;
             document.querySelector('#inproceeding_year').value = reference.dataset.year;
         }
     }

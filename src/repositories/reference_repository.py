@@ -109,8 +109,8 @@ def create_reference_book(reference):
     if check_reference_isnot_none(reference):
         sql = text(
             """
-            INSERT INTO books (citation_key, author, title, book_title, publisher, year)
-            VALUES (:citation_key, :author, :title, :book_title, :publisher, :year)
+            INSERT INTO books (citation_key, author, title, booktitle, publisher, year)
+            VALUES (:citation_key, :author, :title, :booktitle, :publisher, :year)
             """
         )
         db.session.execute(sql, reference)
@@ -133,8 +133,8 @@ def create_reference_inproceeding(reference):
     if check_reference_isnot_none(reference):
         sql = text(
             """
-            INSERT INTO inproceedings (citation_key, author, title, book_title, year)
-            VALUES (:citation_key, :author, :title, :book_title, :year)
+            INSERT INTO inproceedings (citation_key, author, title, booktitle, year)
+            VALUES (:citation_key, :author, :title, :booktitle, :year)
             """
         )
         db.session.execute(sql, reference)
@@ -186,7 +186,7 @@ def update_book(book_id, book_data):
             SET citation_key = :citation_key,
                 author = :author,
                 title = :title,
-                book_title = :book_title,
+                booktitle = :booktitle,
                 publisher = :publisher,
                 year = :year
             WHERE id = :id
@@ -196,7 +196,7 @@ def update_book(book_id, book_data):
             "citation_key": book_data["citation_key"],
             "author": book_data["author"],
             "title": book_data["title"],
-            "book_title": book_data["book_title"],
+            "booktitle": book_data["booktitle"],
             "publisher": book_data["publisher"],
             "year": book_data["year"]
         })
@@ -228,13 +228,13 @@ def update_article(article_id, article_data):
 def update_inproceeding(inproceeding_id, inproceeding_data):
     if (inproceeding_data["author"] != '' and
         inproceeding_data["author"] is not None and
-        inproceeding_data["book_title"] is not None):
+        inproceeding_data["booktitle"] is not None):
         sql = text("""
             UPDATE inproceedings 
             SET citation_key = :citation_key,
                 author = :author,
                 title = :title,
-                book_title = :book_title,
+                booktitle = :booktitle,
                 year = :year
             WHERE id = :id
         """)
@@ -243,7 +243,7 @@ def update_inproceeding(inproceeding_id, inproceeding_data):
             "citation_key": inproceeding_data["citation_key"],
             "author": inproceeding_data["author"],
             "title": inproceeding_data["title"],
-            "book_title": inproceeding_data["book_title"],
+            "booktitle": inproceeding_data["booktitle"],
             "year": inproceeding_data["year"]
         })
         db.session.commit()

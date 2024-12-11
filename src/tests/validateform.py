@@ -10,13 +10,13 @@
 #     // Inproceedings fields
 #     const inproceedingAuthor = document.getElementById('inproceeding_author').value.trim();
 #     const inproceedingTitle = document.getElementById('inproceeding_title').value.trim();
-#     const inproceedingBookTitle = document.getElementById('inproceeding_book_title').value.trim();
+#     const inproceedingBookTitle = document.getElementById('inproceeding_booktitle').value.trim();
 #     const inproceedingYear = document.getElementById('inproceeding_year').value.trim();
 
 #     // Book fields
 #     const bookAuthor = document.getElementById('book_author').value.trim();
-#     const bookTitle = document.getElementById('book_title').value.trim();
-#     const bookBookTitle = document.getElementById('book_book_title').value.trim();
+#     const bookTitle = document.getElementById('booktitle').value.trim();
+#     const bookBookTitle = document.getElementById('book_booktitle').value.trim();
 #     const bookPublisher = document.getElementById('book_publisher').value.trim();
 #     const bookYear = document.getElementById('book_year').value.trim();
 

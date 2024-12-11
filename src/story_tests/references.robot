@@ -82,11 +82,11 @@ Add Conference Paper, BibTeX, edit and delete
     Click Element  add_conference_paper
     Input Text  inproceeding_author  author1
     Input Text  inproceeding_title  title1
-    Input Text  inproceeding_book_title  booktitle1
+    Input Text  inproceeding_booktitle  booktitle1
     Input Text  inproceeding_year  2024
 
     Click Button  Add Reference
-    Page Should Contain  title1 by author1 (2024). Book_title: booktitle1
+    Page Should Contain  title1 by author1 (2024). Book title: booktitle1
 
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
@@ -101,10 +101,10 @@ Add Conference Paper, BibTeX, edit and delete
     Click Element  xpath=//button[text()='Edit']
     Input Text  inproceeding_author  author2
     Input Text  inproceeding_title  title2
-    Input Text  inproceeding_book_title  booktitle2
+    Input Text  inproceeding_booktitle  booktitle2
     Input Text  inproceeding_year  2023
     Click Button  Add Reference
-    Page Should Contain  title2 by author2 (2023). Book_title: booktitle2
+    Page Should Contain  title2 by author2 (2023). Book title: booktitle2
     
     #Delete
     Click Element  xpath=//button[text()='Delete']
@@ -117,12 +117,12 @@ Add Book, BibTeX, edit and delete
     Click Element  add_book
     Input Text  book_author  author1
     Input Text  book_title  title1
-    Input Text  book_book_title  booktitle1
+    Input Text  book_booktitle  booktitle1
     Input Text  book_publisher  publisher1
     Input Text  book_year  2024
 
     Click Button  Add Reference
-    Page Should Contain  title1 by author1 (2024), published by publisher1. Book_title: booktitle1
+    Page Should Contain  title1 by author1 (2024), published by publisher1. Book title: booktitle1
 
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
@@ -138,11 +138,11 @@ Add Book, BibTeX, edit and delete
     Click Element  xpath=//button[text()='Edit']
     Input Text  book_author  author2
     Input Text  book_title  title2
-    Input Text  book_book_title  booktitle2
+    Input Text  book_booktitle  booktitle2
     Input Text  book_publisher  publisher2
     Input Text  book_year  2023
     Click Button  Add Reference
-    Page Should Contain  title2 by author2 (2023), published by publisher2. Book_title: booktitle2
+    Page Should Contain  title2 by author2 (2023), published by publisher2. Book title: booktitle2
 
     #Delete
     Click Element  xpath=//button[text()='Delete']

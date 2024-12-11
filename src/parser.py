@@ -18,7 +18,6 @@ def create_bibtex(entrytype, contents):
         return None
     
     elif entrytype == "book":
-        print("AAAAAAAAAAAAAAA", contents)
         entry = {
             'ENTRYTYPE': entrytype,
             'ID': contents[1],
@@ -91,6 +90,11 @@ def extract_bibtex_fields(bibtex_str):
         fields_of_interest = ['ENTRYTYPE', 'author', 'title', 'booktitle', 'year', 'journal', 'publisher']
         # Extract the fields
         extracted_fields = {field: entry.get(field, None) for field in fields_of_interest}
+        
+        for key, value in extracted_fields.items():
+            if value is None:
+                extracted_fields[key] = "no value"
+        
         return extracted_fields
     else:
         print("No entries found in BibTeX data.")

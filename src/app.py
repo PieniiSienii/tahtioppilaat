@@ -49,7 +49,7 @@ def reference_creation():
         "citation_key": request.form.get("book_citation_key"),
         "author": request.form.get("book_author"),
         "title": request.form.get("book_title"),
-        "book_title": request.form.get("book_book_title"),
+        "booktitle": request.form.get("book_booktitle"),
         "publisher": request.form.get("book_publisher"),
         "year": request.form.get("book_year")
     }
@@ -64,7 +64,7 @@ def reference_creation():
         "citation_key": request.form.get("inproceeding_citation_key"),
         "author": request.form.get("inproceeding_author"),
         "title": request.form.get("inproceeding_title"),
-        "book_title": request.form.get("inproceeding_book_title"),
+        "booktitle": request.form.get("inproceeding_booktitle"),
         "year": request.form.get("inproceeding_year"),
     }
     # Save reference to database
@@ -101,8 +101,8 @@ def edit_reference(reference_type, reference_id):
         update_book(reference_id, {
             "citation_key": request.form.get("book_citation_key"),
             "author": request.form.get("book_author"),
-            "title": request.form.get("book_title"),
-            "book_title": request.form.get("book_book_title"),
+            "title": request.form.get("booktitle"),
+            "booktitle": request.form.get("book_booktitle"),
             "publisher": request.form.get("book_publisher"),
             "year": request.form.get("book_year")
         })
@@ -119,7 +119,7 @@ def edit_reference(reference_type, reference_id):
             "citation_key": request.form.get("inproceeding_citation_key"),
             "author": request.form.get("inproceeding_author"),
             "title": request.form.get("inproceeding_title"),
-            "book_title": request.form.get("inproceeding_book_title"),
+            "booktitle": request.form.get("inproceeding_booktitle"),
             "year": request.form.get("inproceeding_year")
         })
     return redirect("/")
@@ -159,7 +159,7 @@ def export_all_bibtex():
                 book.citation_key,
                 book.author,
                 book.title,
-                book.book_title,
+                book.booktitle,
                 book.publisher,
                 book.year
             ]
@@ -190,7 +190,7 @@ def export_all_bibtex():
                 inproceeding.citation_key,
                 inproceeding.author,
                 inproceeding.title,
-                inproceeding.book_title,
+                inproceeding.booktitle,
                 inproceeding.year
             ]
             entry = parser.create_bibtex('inproceeding', contents)

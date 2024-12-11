@@ -101,7 +101,7 @@ def edit_reference(reference_type, reference_id):
         update_book(reference_id, {
             "citation_key": request.form.get("book_citation_key"),
             "author": request.form.get("book_author"),
-            "title": request.form.get("booktitle"),
+            "title": request.form.get("book_title"),
             "booktitle": request.form.get("book_booktitle"),
             "publisher": request.form.get("book_publisher"),
             "year": request.form.get("book_year")

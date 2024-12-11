@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify
 from db_helper import reset_db
-from repositories.todo_repository import get_books, create_reference_doi,\
+from repositories.reference_repository import get_books, create_reference_doi,\
 create_reference_book, create_reference_article,\
 create_reference_inproceeding, get_dois, get_articles, get_inproceedings, \
 delete_doi, delete_book, delete_article, delete_inproceeding, \
@@ -156,7 +156,7 @@ def export_all_bibtex():
             # For books: ID, author, title, booktitle, publisher, year
             contents = [
                 book.id,  # contents[0] - not used in create_bibtex
-                article.citation_key,
+                book.citation_key,
                 book.author,
                 book.title,
                 book.book_title,
@@ -187,7 +187,7 @@ def export_all_bibtex():
             # For inproceedings: ID, author, title, booktitle, year
             contents = [
                 inproceeding.id,  # contents[0] - not used in create_bibtex
-                article.citation_key,
+                inproceeding.citation_key,
                 inproceeding.author,
                 inproceeding.title,
                 inproceeding.book_title,

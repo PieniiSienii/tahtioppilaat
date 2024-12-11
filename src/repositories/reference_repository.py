@@ -249,7 +249,9 @@ def update_inproceeding(inproceeding_id, inproceeding_data):
         db.session.commit()
 
 def check_reference_isnot_none(reference):
-    for field in reference.values():
-        if field == '' or field == None:
+    for field_name, field in reference.items():
+        if field_name == 'citation_key':
+            continue
+        if field == '' or field is None:
             return False
     return True

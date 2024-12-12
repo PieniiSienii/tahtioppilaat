@@ -80,6 +80,7 @@ Add Article, BibTeX, edit and delete
 Add Conference Paper, BibTeX, edit and delete
     Go To  ${HOME_URL}
     Click Element  add_conference_paper
+    Input Text  inproceeding_citation_key  test1
     Input Text  inproceeding_author  author1
     Input Text  inproceeding_title  title1
     Input Text  inproceeding_booktitle  booktitle1
@@ -91,7 +92,7 @@ Add Conference Paper, BibTeX, edit and delete
     #BibTeX
     Click Element  xpath=//button[text()='BibTeX']
     Sleep  3s
-    Page Should Contain  @inproceeding{,
+    Page Should Contain  @inproceeding{test1,
     Page Should Contain  author = {author1},
     Page Should Contain  booktitle = {booktitle1},
     Page Should Contain  title = {title1},

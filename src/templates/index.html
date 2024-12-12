@@ -37,6 +37,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="doi">DOI:</label><br>
           <input 
             type="text" 
@@ -62,6 +63,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="article_author">Author:</label><br>
           <input 
             type="text" 
@@ -116,6 +118,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="inproceeding_author">Author:</label><br>
           <input 
             type="text" 
@@ -170,6 +173,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="book_author">Author:</label><br>
           <input 
             type="text" 
@@ -256,7 +260,11 @@ My Bibliography Manager
       <ul style="list-style: none; padding: 0;">
         {% for article in articles %}
           <li id="reference-article-{{article.id}}"
-              data-doi="{{article.article}}"
+              data-key="{{article.citation_key}}"
+              data-author="{{article.author}}"
+              data-title="{{article.title}}"
+              data-journal="{{article.journal}}"
+              data-year="{{article.year}}"
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{article}}</span>
             <div>
@@ -273,7 +281,11 @@ My Bibliography Manager
       <ul style="list-style: none; padding: 0;">
         {% for inproceeding in inproceedings %}
           <li id="reference-inproceeding-{{inproceeding.id}}"
-              data-doi="{{inproceeding.inproceeding}}"
+              data-key="{{inproceeding.citation_key}}"
+              data-author="{{inproceeding.author}}"
+              data-title="{{inproceeding.title}}"
+              data-booktitle="{{inproceeding.booktitle}}"
+              data-year="{{inproceeding.year}}"
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{inproceeding}}</span>
             <div>
@@ -289,7 +301,12 @@ My Bibliography Manager
       <ul style="list-style: none; padding: 0;">
         {% for book in books %}
           <li id="reference-book-{{book.id}}"
-              data-doi="{{book.book}}"
+              data-key="{{book.citation_key}}"
+              data-author="{{book.author}}"
+              data-title="{{book.title}}"
+              data-booktitle="{{book.booktitle}}"
+              data-publisher="{{book.publisher}}"
+              data-year="{{book.year}}"
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{book}}</span>
             <div>

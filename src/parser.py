@@ -64,7 +64,6 @@ def convert_to_bibtex(doi):
         )
         # Return the BibTeX result
         bibtex_str = result.stdout.decode('utf-8')
-        # print(extract_bibtex_fields(bibtex_str))
         return extract_bibtex_fields(bibtex_str)  # Convert bytes to string
     except subprocess.CalledProcessError as e:
         print(f"Error: {e.stderr.decode('utf-8')}")
@@ -90,7 +89,7 @@ def extract_bibtex_fields(bibtex_str):
         fields_of_interest = ['ENTRYTYPE', 'author', 'title', 'booktitle', 'year', 'journal', 'publisher']
         # Extract the fields
         extracted_fields = {field: entry.get(field, None) for field in fields_of_interest}
-        
+
         for key, value in extracted_fields.items():
             if value is None:
                 extracted_fields[key] = "no value"

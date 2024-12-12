@@ -14,7 +14,7 @@ function deleteReference(type, id) {
 function editReference(type, id) {
     // Clear the form first
     document.querySelector('#referenceForm').reset();
-    
+
     // Find and open the correct details section based on type
     let detailsSection;
     if (type === 'doi') {
@@ -40,20 +40,23 @@ function editReference(type, id) {
         if (type === 'doi') {
             document.querySelector('#doi').value = reference.dataset.doi;
         } else if (type === 'article') {
+            document.querySelector('#article_citation_key').value = reference.dataset.key;
             document.querySelector('#article_author').value = reference.dataset.author;
             document.querySelector('#article_title').value = reference.dataset.title;
             document.querySelector('#article_journal').value = reference.dataset.journal;
             document.querySelector('#article_year').value = reference.dataset.year;
         } else if (type === 'book') {
+            document.querySelector('#book_citation_key').value = reference.dataset.key;
             document.querySelector('#book_author').value = reference.dataset.author;
             document.querySelector('#book_title').value = reference.dataset.title;
-            document.querySelector('#book_booktitle').value = reference.dataset.bookTitle;
+            document.querySelector('#book_booktitle').value = reference.dataset.booktitle;
             document.querySelector('#book_publisher').value = reference.dataset.publisher;
             document.querySelector('#book_year').value = reference.dataset.year;
         } else if (type === 'inproceeding') {
+            document.querySelector('#inproceeding_citation_key').value = reference.dataset.key;
             document.querySelector('#inproceeding_author').value = reference.dataset.author;
             document.querySelector('#inproceeding_title').value = reference.dataset.title;
-            document.querySelector('#inproceeding_booktitle').value = reference.dataset.bookTitle;
+            document.querySelector('#inproceeding_booktitle').value = reference.dataset.booktitle;
             document.querySelector('#inproceeding_year').value = reference.dataset.year;
         }
     }

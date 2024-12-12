@@ -98,6 +98,7 @@ def edit_reference(reference_type, reference_id):
     if reference_type == "doi":
         update_doi(reference_id, request.form.get("doi"))
     elif reference_type == "book":
+        print("Testing", request.form.get("book_author"))
         update_book(reference_id, {
             "citation_key": request.form.get("book_citation_key"),
             "author": request.form.get("book_author"),

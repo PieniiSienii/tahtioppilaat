@@ -24,7 +24,7 @@ class TestBook(unittest.TestCase):
     def test_book_string_representation(self):
         book = Book(1, "test", "John Doe", "Test Book",
                     "Book Collection", "Test Publisher", 2024)
-        expected = "Test Book by John Doe (2024), published by Test Publisher. booktitle: Book Collection"
+        expected = "Test Book by John Doe (2024), published by Test Publisher. Book title: Book Collection"
         self.assertEqual(str(book), expected)
 
 
@@ -72,7 +72,7 @@ class TestInproceeding(unittest.TestCase):
         inproceeding = Inproceeding(
             1, "test", "Alice Brown", "Test Paper", "Conference Proceedings", 2024)
         # Updated format
-        expected = "Test Paper by Alice Brown (2024). booktitle: Conference Proceedings"
+        expected = "Test Paper by Alice Brown (2024). Book title: Conference Proceedings"
         self.assertEqual(str(inproceeding), expected)
 
 
@@ -88,4 +88,4 @@ class TestIntegration(unittest.TestCase):
         # Updated string checks to match actual formats
         self.assertIn("published by", str(book))
         self.assertIn("journal:", str(article))  # Updated check
-        self.assertIn("booktitle:", str(inproceeding))  # Updated check
+        self.assertIn("Book title:", str(inproceeding))  # Updated check

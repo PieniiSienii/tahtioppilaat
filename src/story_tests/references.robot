@@ -150,3 +150,27 @@ Add Book, BibTeX, edit and delete
     Handle Alert  ACCEPT
     Sleep  3s
     Page Should Not Contain  author1
+
+Test Search
+    Go To  ${HOME_URL}
+    Click Element  add_book
+    Input Text  book_author  author1
+    Input Text  book_title  title1
+    Input Text  book_booktitle  booktitle1
+    Input Text  book_publisher  publisher1
+    Input Text  book_year  2024
+
+    Click Button  Add Reference
+
+    Click Element  add_book
+    Input Text  book_author  author2
+    Input Text  book_title  title2
+    Input Text  book_booktitle  booktitle2
+    Input Text  book_publisher  publisher2
+    Input Text  book_year  2024
+
+    Click Button  Add Reference
+    Input Text  referenceSearch  title2
+    Sleep  0.5s
+
+    Element Should Not Be Visible  title1 by author1 (2024), published by publisher1. Book title: booktitle1

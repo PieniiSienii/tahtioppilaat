@@ -4,6 +4,7 @@
 
 [Backlog linkki](https://docs.google.com/spreadsheets/d/1tfCgtgHHC6YhraJJi992deDDh6dO0IaimUXH1h2Ntps/edit?gid=0#gid=0) \
 [Raportin linkki](https://docs.google.com/document/d/1hKblVI6xEbdoVMlVcHNgeIzqjhz6HfwkFmPojqSll0E/edit?tab=t.0)
+
 Definition of done: 
 
 Ohjelma toimii niin kuin user story kuvaa, koodia on testattu, jonka jälkeen löydetyt ongelmat korjattu.

@@ -98,7 +98,7 @@ def setup_db():
         "  citation_key TEXT NOT NULL, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
-        "  book_title TEXT NOT NULL, "
+        "  booktitle TEXT NOT NULL, "
         "  publisher TEXT NOT NULL, "
         "  year INTEGER NOT NULL "
         ")"
@@ -129,7 +129,7 @@ def setup_db():
         "  citation_key TEXT NOT NULL, "
         "  author TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
-        "  book_title TEXT NOT NULL, "
+        "  booktitle TEXT NOT NULL, "
         "  year INTEGER NOT NULL "
         ")"
     )

@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify
 from db_helper import reset_db
-from repositories.todo_repository import get_books, create_reference_doi,\
+from repositories.reference_repository import get_books, create_reference_doi,\
 create_reference_book, create_reference_article,\
 create_reference_inproceeding, get_dois, get_articles, get_inproceedings, \
 delete_doi, delete_book, delete_article, delete_inproceeding, \
@@ -28,15 +28,28 @@ def index():
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
+
     # Handle doi case
-    doi_reference = request.form.get("doi")
+    reference_by_doi = parser.convert_to_bibtex(request.form.get("doi"))
+
+    if reference_by_doi:
+        reference_by_doi["citation_key"] = request.form.get("doi_citation_key")
+        match reference_by_doi["ENTRYTYPE"]:
+            case "book":
+                create_reference_book(reference_by_doi)
+            case "article":
+                create_reference_article(reference_by_doi)
+            case "inproceeding":
+                create_reference_inproceeding(reference_by_doi)
+            case _:
+                pass
 
     # Handle manual entry case
     book_reference = {
         "citation_key": request.form.get("book_citation_key"),
         "author": request.form.get("book_author"),
         "title": request.form.get("book_title"),
-        "book_title": request.form.get("book_book_title"),
+        "booktitle": request.form.get("book_booktitle"),
         "publisher": request.form.get("book_publisher"),
         "year": request.form.get("book_year")
     }
@@ -51,11 +64,11 @@ def reference_creation():
         "citation_key": request.form.get("inproceeding_citation_key"),
         "author": request.form.get("inproceeding_author"),
         "title": request.form.get("inproceeding_title"),
-        "book_title": request.form.get("inproceeding_book_title"),
+        "booktitle": request.form.get("inproceeding_booktitle"),
         "year": request.form.get("inproceeding_year"),
     }
     # Save reference to database
-    create_reference_doi(doi_reference)
+    # create_reference_doi(doi_reference)
     create_reference_book(book_reference)
     create_reference_article(article_reference)
     create_reference_inproceeding(inproceeding_reference)
@@ -85,11 +98,12 @@ def edit_reference(reference_type, reference_id):
     if reference_type == "doi":
         update_doi(reference_id, request.form.get("doi"))
     elif reference_type == "book":
+        print("Testing", request.form.get("book_author"))
         update_book(reference_id, {
             "citation_key": request.form.get("book_citation_key"),
             "author": request.form.get("book_author"),
             "title": request.form.get("book_title"),
-            "book_title": request.form.get("book_book_title"),
+            "booktitle": request.form.get("book_booktitle"),
             "publisher": request.form.get("book_publisher"),
             "year": request.form.get("book_year")
         })
@@ -106,7 +120,7 @@ def edit_reference(reference_type, reference_id):
             "citation_key": request.form.get("inproceeding_citation_key"),
             "author": request.form.get("inproceeding_author"),
             "title": request.form.get("inproceeding_title"),
-            "book_title": request.form.get("inproceeding_book_title"),
+            "booktitle": request.form.get("inproceeding_booktitle"),
             "year": request.form.get("inproceeding_year")
         })
     return redirect("/")
@@ -143,10 +157,10 @@ def export_all_bibtex():
             # For books: ID, author, title, booktitle, publisher, year
             contents = [
                 book.id,  # contents[0] - not used in create_bibtex
-                article.citation_key,
+                book.citation_key,
                 book.author,
                 book.title,
-                book.book_title,
+                book.booktitle,
                 book.publisher,
                 book.year
             ]
@@ -174,10 +188,10 @@ def export_all_bibtex():
             # For inproceedings: ID, author, title, booktitle, year
             contents = [
                 inproceeding.id,  # contents[0] - not used in create_bibtex
-                article.citation_key,
+                inproceeding.citation_key,
                 inproceeding.author,
                 inproceeding.title,
-                inproceeding.book_title,
+                inproceeding.booktitle,
                 inproceeding.year
             ]
             entry = parser.create_bibtex('inproceeding', contents)

@@ -11,7 +11,7 @@ class TestBook(unittest.TestCase):
         self.assertEqual(book.citation_key, "test")
         self.assertEqual(book.author, "John Doe")
         self.assertEqual(book.title, "Test Book")
-        self.assertEqual(book.book_title, "Book Collection")
+        self.assertEqual(book.booktitle, "Book Collection")
         self.assertEqual(book.publisher, "Test Publisher")
         self.assertEqual(book.year, 2024)
 
@@ -24,7 +24,7 @@ class TestBook(unittest.TestCase):
     def test_book_string_representation(self):
         book = Book(1, "test", "John Doe", "Test Book",
                     "Book Collection", "Test Publisher", 2024)
-        expected = "Test Book by John Doe (2024), published by Test Publisher. Book_title: Book Collection"
+        expected = "Test Book by John Doe (2024), published by Test Publisher. Book title: Book Collection"
         self.assertEqual(str(book), expected)
 
 
@@ -59,7 +59,7 @@ class TestInproceeding(unittest.TestCase):
         self.assertEqual(inproceeding.citation_key, "test")
         self.assertEqual(inproceeding.author, "Alice Brown")
         self.assertEqual(inproceeding.title, "Test Paper")
-        self.assertEqual(inproceeding.book_title, "Conference Proceedings")
+        self.assertEqual(inproceeding.booktitle, "Conference Proceedings")
         self.assertEqual(inproceeding.year, 2024)
 
     def test_inproceeding_missing_fields(self):
@@ -72,7 +72,7 @@ class TestInproceeding(unittest.TestCase):
         inproceeding = Inproceeding(
             1, "test", "Alice Brown", "Test Paper", "Conference Proceedings", 2024)
         # Updated format
-        expected = "Test Paper by Alice Brown (2024). Book_title: Conference Proceedings"
+        expected = "Test Paper by Alice Brown (2024). Book title: Conference Proceedings"
         self.assertEqual(str(inproceeding), expected)
 
 
@@ -88,4 +88,4 @@ class TestIntegration(unittest.TestCase):
         # Updated string checks to match actual formats
         self.assertIn("published by", str(book))
         self.assertIn("journal:", str(article))  # Updated check
-        self.assertIn("Book_title:", str(inproceeding))  # Updated check
+        self.assertIn("Book title:", str(inproceeding))  # Updated check

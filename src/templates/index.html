@@ -9,7 +9,7 @@ My Bibliography Manager
   <h2>My Bibliography Manager</h2>
   <button 
     onclick="toggleTheme()" 
-    style="padding: 8px 16px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;"
+    style="padding: 8px 16px; background-color: #6853f1; color: white; border: none; border-radius: 4px; cursor: pointer;"
   >
     <span id="theme-icon">🌙</span> Toggle Theme
   </button>
@@ -37,6 +37,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="doi">DOI:</label><br>
           <input 
             type="text" 
@@ -62,6 +63,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="article_author">Author:</label><br>
           <input 
             type="text" 
@@ -116,6 +118,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="inproceeding_author">Author:</label><br>
           <input 
             type="text" 
@@ -134,11 +137,11 @@ My Bibliography Manager
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
           <br><br>
-          <label for="inproceeding_book_title">Book Title (Conference Proceedings):</label><br>
+          <label for="inproceeding_booktitle">Book Title (Conference Proceedings):</label><br>
           <input 
             type="text" 
-            id="inproceeding_book_title" 
-            name="inproceeding_book_title" 
+            id="inproceeding_booktitle" 
+            name="inproceeding_booktitle" 
             placeholder="Enter the conference proceedings name..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
@@ -170,6 +173,7 @@ My Bibliography Manager
             placeholder="Enter a citation key..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
+          <br><br>
           <label for="book_author">Author:</label><br>
           <input 
             type="text" 
@@ -188,11 +192,11 @@ My Bibliography Manager
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
           <br><br>
-          <label for="book_book_title">Book_Title:</label><br>
+          <label for="book_booktitle">Book title:</label><br>
           <input 
             type="text" 
-            id="book_book_title" 
-            name="book_book_title" 
+            id="book_booktitle" 
+            name="book_booktitle" 
             placeholder="Enter the title here..." 
             style="width: 300px; padding: 8px; margin-top: 5px;"
           >
@@ -221,7 +225,7 @@ My Bibliography Manager
       <div style="margin-top: 20px; margin-left: 10px; display: flex; gap: 10px;">
         <button 
           type="submit" 
-          style="padding: 8px 16px; background-color: #60a060; color: white; border: none; border-radius: 4px; cursor: pointer;"
+          style="padding: 8px 16px; background-color: #779877; color: white; border: none; border-radius: 4px; cursor: pointer;"
           onclick="return true"
         >
           Add Reference
@@ -229,7 +233,7 @@ My Bibliography Manager
         <button 
           type="button"
           onclick="exportAllBibTeX()"
-          style="padding: 8px 16px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;"
+          style="padding: 8px 16px; background-color: #7ba9d2; color: white; border: none; border-radius: 4px; cursor: pointer;"
         >
           Export BibTeX
         </button>
@@ -240,17 +244,33 @@ My Bibliography Manager
 <!-- Middle Column - Display References -->
   <div style="flex: 1; max-width: 800px;">
     <div style="margin-top: 30px;">
+      <!-- Search Bar -->
+      <div style="margin-bottom: 30px; text-align: center;">
+        <div style="display: inline-block; width: 100%; max-width: 600px;">
+          <input 
+            type="text" 
+            id="referenceSearch" 
+            placeholder="Search references..." 
+            style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;"
+            oninput="searchReferences()"
+          >
+        </div>
+      </div>
       <h3>Articles:</h3>
       <ul style="list-style: none; padding: 0;">
         {% for article in articles %}
           <li id="reference-article-{{article.id}}"
-              data-doi="{{article.article}}"
+              data-key="{{article.citation_key}}"
+              data-author="{{article.author}}"
+              data-title="{{article.title}}"
+              data-journal="{{article.journal}}"
+              data-year="{{article.year}}"
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{article}}</span>
             <div>
-              <button onclick="editReference('article', {{article.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-              <button onclick="deleteReference('article', {{article.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-              <button onclick="viewBibTeX('article', {{article.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
+              <button onclick="editReference('article', '{{article.id}}')" style="padding: 5px 10px; margin-right: 5px; background-color: #7db77f; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
+              <button onclick="deleteReference('article', '{{article.id}}')" style="padding: 5px 10px; background-color: #db726b; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="viewBibTeX('article', '{{article.id}}')" style="padding: 5px 10px; background-color: #65abe5; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
@@ -261,13 +281,17 @@ My Bibliography Manager
       <ul style="list-style: none; padding: 0;">
         {% for inproceeding in inproceedings %}
           <li id="reference-inproceeding-{{inproceeding.id}}"
-              data-doi="{{inproceeding.inproceeding}}"
+              data-key="{{inproceeding.citation_key}}"
+              data-author="{{inproceeding.author}}"
+              data-title="{{inproceeding.title}}"
+              data-booktitle="{{inproceeding.booktitle}}"
+              data-year="{{inproceeding.year}}"
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{inproceeding}}</span>
             <div>
-              <button onclick="editReference('inproceeding', {{inproceeding.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-              <button onclick="deleteReference('inproceeding', {{inproceeding.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-              <button onclick="viewBibTeX('inproceeding', {{inproceeding.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
+              <button onclick="editReference('inproceeding', '{{inproceeding.id}}')" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
+              <button onclick="deleteReference('inproceeding', '{{inproceeding.id}}')" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="viewBibTeX('inproceeding', '{{inproceeding.id}}')" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
@@ -277,36 +301,26 @@ My Bibliography Manager
       <ul style="list-style: none; padding: 0;">
         {% for book in books %}
           <li id="reference-book-{{book.id}}"
-              data-doi="{{book.book}}"
+              data-key="{{book.citation_key}}"
+              data-author="{{book.author}}"
+              data-title="{{book.title}}"
+              data-booktitle="{{book.booktitle}}"
+              data-publisher="{{book.publisher}}"
+              data-year="{{book.year}}"
               style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
             <span>{{book}}</span>
             <div>
-              <button onclick="editReference('book', {{book.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-              <button onclick="deleteReference('book', {{book.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-              <button onclick="viewBibTeX('book', {{book.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
+              <button onclick="editReference('book', '{{book.id}}')" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
+              <button onclick="deleteReference('book', '{{book.id}}')" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+              <button onclick="viewBibTeX('book', '{{book.id}}')" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
             </div>
           </li>
         {% endfor %}
       </ul>
-
-      <h3>DOIs:</h3>
-      <ul style="list-style: none; padding: 0;">
-        {% for doi in dois %}
-          <li id="reference-doi-{{doi.id}}"
-              data-doi="{{doi.doi}}"
-              style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-            <span>{{doi}}</span>
-            <div>
-              <button onclick="editReference('doi', {{doi.id}})" style="padding: 5px 10px; margin-right: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-              <button onclick="deleteReference('doi', {{doi.id}})" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-              <button onclick="viewBibTeX('doi', {{doi.id}})" style="padding: 5px 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">BibTeX</button>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-
     </div>
   </div>
+
+      
 
   <!-- Right Column - BibTeX Display -->
   <div id="bibtexDisplay" style="flex: 0 0 400px; display: none;" data-current-ref="">

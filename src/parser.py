@@ -1,7 +1,12 @@
 import bibtexparser
 import subprocess
 from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bparser import BibTexParser
+from bibtexparser.customization import convert_to_unicode
 from bibtexparser.bibdatabase import BibDatabase
+from book import Book
+from article import Article
+from inproceeding import Inproceeding
 
 def create_bibtex(entrytype, contents):
     print("creating", entrytype)
@@ -13,7 +18,6 @@ def create_bibtex(entrytype, contents):
         return None
     
     elif entrytype == "book":
-        print("AAAAAAAAAAAAAAA", contents)
         entry = {
             'ENTRYTYPE': entrytype,
             'ID': contents[1],
@@ -59,9 +63,40 @@ def convert_to_bibtex(doi):
             stderr=subprocess.PIPE  # Capture the standard error
         )
         # Return the BibTeX result
-        return result.stdout.decode('utf-8')  # Convert bytes to string
+        bibtex_str = result.stdout.decode('utf-8')
+        return extract_bibtex_fields(bibtex_str)  # Convert bytes to string
     except subprocess.CalledProcessError as e:
         print(f"Error: {e.stderr.decode('utf-8')}")
+        return None
+
+
+def extract_bibtex_fields(bibtex_str):
+    # Create a BibTeX parser
+    parser = BibTexParser()
+    parser.customization = convert_to_unicode
+    
+    # Parse the BibTeX string
+    try:
+        bib_database = bibtexparser.loads(bibtex_str, parser=parser)
+    except Exception as e:
+        print(f"Error parsing BibTeX: {e}")
+        return None
+    
+    # Extract fields from the first entry (assuming there is at least one entry)
+    if bib_database.entries:
+        entry = bib_database.entries[0]
+        # Define the fields you are interested in
+        fields_of_interest = ['ENTRYTYPE', 'author', 'title', 'booktitle', 'year', 'journal', 'publisher']
+        # Extract the fields
+        extracted_fields = {field: entry.get(field, None) for field in fields_of_interest}
+
+        for key, value in extracted_fields.items():
+            if value is None:
+                extracted_fields[key] = "no value"
+        
+        return extracted_fields
+    else:
+        print("No entries found in BibTeX data.")
         return None
 
 
